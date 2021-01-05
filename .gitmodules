@@ -3,5 +3,5 @@
 	url = https://github.com/adityatelange/hugo-PaperMod
 [submodule "public"]
 	path = public
-	url = https://github.com/dingyuchen/dingyuchen.github.io.git
+	url = git@github.com:dingyuchen/dingyuchen.github.io.git
 	branch = main
