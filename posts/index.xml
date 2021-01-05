@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Ding YuChen</title>
+    <link>https://dingyuchen.github.io/posts/</link>
+    <description>Recent content in Posts on Ding YuChen</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Jan 2021 11:13:43 +0800</lastBuildDate>
+    
+	<atom:link href="https://dingyuchen.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Math and Computer Science</title>
+      <link>https://dingyuchen.github.io/posts/my-first-post/</link>
+      <pubDate>Tue, 05 Jan 2021 11:13:43 +0800</pubDate>
+      
+      <guid>https://dingyuchen.github.io/posts/my-first-post/</guid>
+      <description>Being a double-degree student, I often think about why I am good in 1 half of my degree and so much worse in the other. Even though I seriously suck at math, I find that the subject has been made much more accessible after delving into computer science.
+Here&amp;rsquo;s why.
+Bridge from the concrete to the abstract In the Singapore context, we were most certainly asked to draw models to solve math word problems.</description>
+    </item>
+    
+  </channel>
+</rss>
