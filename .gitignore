@@ -19,6 +19,7 @@ next-env.d.ts
 
 # production
 /build
+/.contentlayer
 
 # misc
 .DS_Store
