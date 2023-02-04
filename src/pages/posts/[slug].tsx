@@ -5,7 +5,7 @@ import { allBlogPosts, BlogPost } from 'contentlayer/generated'
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { GetStaticProps } from 'next'
 
-export async function getStaticPaths() {
+export const getStaticPaths = () => {
     const paths = allBlogPosts.map((post) => `/posts/${post.slug}`)
     return {
         paths,

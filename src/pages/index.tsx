@@ -28,10 +28,10 @@ const Home = ({ posts }: { posts: BlogPost[] }) => {
   return (
     <div className="mx-auto max-w-2xl py-16 text-center">
       <Head>
-        <title>Contentlayer Blog Example</title>
+        <title>Ding YuChen</title>
       </Head>
 
-      <h1 className="mb-8 text-3xl font-bold">Contentlayer Blog Example</h1>
+      <h1 className="mb-8 text-3xl">My Digital Garden</h1>
 
       {posts.map((post: BlogPost, idx: number) => (
         <PostCard key={idx} {...post} />
@@ -64,7 +64,7 @@ const AuthShowcase: React.FC = () => {
   );
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps = () => {
   const posts = allBlogPosts.sort((a: BlogPost, b) => {
     return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))
   })

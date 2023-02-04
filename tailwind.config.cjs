@@ -7,7 +7,10 @@ module.exports = {
     "./posts/**/*.mdx"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/typography')
