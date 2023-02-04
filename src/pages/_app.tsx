@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "../utils/api";
 
 import "../styles/globals.css";
-import "katex/dist/katex.css"
+// import "katex/dist/katex.css"
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
