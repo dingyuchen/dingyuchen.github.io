@@ -14,8 +14,8 @@ const computedFields = {
   }
 };
 
-export const BlogPost = defineDocumentType(() => ({
-  name: 'BlogPost',
+export const Zettel = defineDocumentType(() => ({
+  name: 'Zettel',
   filePathPattern: `**/*.mdx`,
   contentType: 'mdx',
   fields: {
@@ -26,10 +26,6 @@ export const BlogPost = defineDocumentType(() => ({
     publishedAt: {
       type: 'date',
       required: true,
-    },
-    updatedAt: {
-      type: 'date',
-      required: false
     },
     summary: {
       type: 'string',
@@ -43,10 +39,13 @@ export const BlogPost = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: 'posts',
-  documentTypes: [BlogPost],
+  contentDirPath: 'notes',
+  documentTypes: [Zettel],
   mdx: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [
+      remarkGfm,
+      remarkMath,
+    ],
     rehypePlugins: [
       rehypeSlug,
       [
@@ -76,7 +75,6 @@ export default makeSource({
           },
         },
       ],
-      remarkMath,
       rehypeKatex
     ],
   },

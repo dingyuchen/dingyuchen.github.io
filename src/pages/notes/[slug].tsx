@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { format, parseISO } from 'date-fns'
-import { allBlogPosts, BlogPost } from 'contentlayer/generated'
+import { Zettel, allZettels } from 'contentlayer/generated'
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { GetStaticProps } from 'next'
 
+import Counter from "../../components/Counter"
+
 export const getStaticPaths = () => {
-    const paths = allBlogPosts.map((post) => `/posts/${post.slug}`)
+    const paths = allZettels.map((post) => `/notes/${post.slug}`)
     return {
         paths,
         fallback: false,
@@ -14,7 +16,7 @@ export const getStaticPaths = () => {
 }
 
 export const getStaticProps: GetStaticProps = ({ params }) => {
-    const post = allBlogPosts.find((post) => post._raw.flattenedPath === params?.slug)
+    const post = allZettels.find((post) => post._raw.flattenedPath === params?.slug)
     return {
         props: {
             post,
@@ -22,7 +24,7 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
     }
 }
 
-const PostLayout = ({ post }: { post: BlogPost }) => {
+const PostLayout = ({ post }: { post: Zettel }) => {
     const Page = useMDXComponent(post.body.code)
     return (
         <>
@@ -42,6 +44,7 @@ const PostLayout = ({ post }: { post: BlogPost }) => {
                     </time>
                 </div>
 
+                {/* <Page components={{ Counter }} /> */}
                 <Page />
             </article>
         </>

@@ -5,17 +5,17 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { api } from "../utils/api";
 
 import { compareDesc, format, parseISO } from 'date-fns'
-import { allBlogPosts, BlogPost } from 'contentlayer/generated'
+import { allZettels, Zettel } from 'contentlayer/generated'
 
 
-const PostCard = (post: BlogPost) => {
+const PostCard = (post: Zettel) => {
   return (
     <div className="mb-6">
       <time dateTime={post.publishedAt} className="block text-sm text-slate-600">
         {format(parseISO(post.publishedAt), 'LLLL d, yyyy')}
       </time>
       <h2 className="text-lg">
-        <Link href={`posts/${post.slug}`}>
+        <Link href={`notes/${post.slug}`}>
           <p className="text-blue-700 hover:text-blue-900">{post.title}</p>
           <p className="prose">{post.summary}</p>
         </Link>
@@ -24,7 +24,7 @@ const PostCard = (post: BlogPost) => {
   )
 }
 
-const Home = ({ posts }: { posts: BlogPost[] }) => {
+const Home = ({ posts }: { posts: Zettel[] }) => {
   return (
     <div className="mx-auto max-w-2xl py-16 text-center">
       <Head>
@@ -33,7 +33,7 @@ const Home = ({ posts }: { posts: BlogPost[] }) => {
 
       <h1 className="mb-8 text-3xl">My Digital Garden</h1>
 
-      {posts.map((post: BlogPost, idx: number) => (
+      {posts.map((post: Zettel, idx: number) => (
         <PostCard key={idx} {...post} />
       ))}
     </div>
@@ -65,7 +65,7 @@ const AuthShowcase: React.FC = () => {
 };
 
 export const getStaticProps = () => {
-  const posts = allBlogPosts.sort((a: BlogPost, b) => {
+  const posts = allZettels.sort((a: Zettel, b) => {
     return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))
   })
   return { props: { posts } }
