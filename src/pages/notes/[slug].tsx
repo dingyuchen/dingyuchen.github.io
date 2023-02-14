@@ -5,18 +5,21 @@ import { Zettel, allZettels } from 'contentlayer/generated'
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { GetStaticProps } from 'next'
 
-import Counter from "../../components/Counter"
-
 export const getStaticPaths = () => {
-    const paths = allZettels.map((post) => `/notes/${post.slug}`)
+    const paths = allZettels.map((post) => `/${post.slug}`)
     return {
         paths,
         fallback: false,
     }
 }
 
+const getFileNameWithoutExtension = (fileName: string) => {
+    const segmentedName = fileName.split('.').slice(0, -1)
+    return segmentedName.join(".")
+}
+
 export const getStaticProps: GetStaticProps = ({ params }) => {
-    const post = allZettels.find((post) => post._raw.flattenedPath === params?.slug)
+    const post = allZettels.find((post) => getFileNameWithoutExtension(post._raw.sourceFileName) === params?.slug)
     return {
         props: {
             post,
@@ -25,6 +28,7 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 }
 
 const PostLayout = ({ post }: { post: Zettel }) => {
+    const created = new Date(post.created)
     const Page = useMDXComponent(post.body.code)
     return (
         <>
@@ -39,12 +43,11 @@ const PostLayout = ({ post }: { post: Zettel }) => {
                 </div>
                 <div className="mb-6 text-center">
                     <h1 className="mb-1 text-3xl font-bold">{post.title}</h1>
-                    <time dateTime={post.publishedAt} className="text-sm text-slate-600">
-                        {format(parseISO(post.publishedAt), 'LLLL d, yyyy')}
+                    <time dateTime={created.toDateString()} className="text-sm text-slate-600">
+                        {format(created, 'LLLL d, yyyy')}
                     </time>
                 </div>
 
-                {/* <Page components={{ Counter }} /> */}
                 <Page />
             </article>
         </>

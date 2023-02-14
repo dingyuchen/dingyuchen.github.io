@@ -4,20 +4,22 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
 
-import { compareDesc, format, parseISO } from 'date-fns'
+import { compareDesc, format } from 'date-fns'
 import { allZettels, Zettel } from 'contentlayer/generated'
 
 
 const PostCard = (post: Zettel) => {
+  const created = new Date(post.created)
+  console.log(post._raw.flattenedPath)
   return (
     <div className="mb-6">
-      <time dateTime={post.publishedAt} className="block text-sm text-slate-600">
-        {format(parseISO(post.publishedAt), 'LLLL d, yyyy')}
+      <time dateTime={created.toDateString()} className="block text-sm text-slate-600">
+        {format(created, 'LLLL d, yyyy')}
       </time>
       <h2 className="text-lg">
-        <Link href={`notes/${post.slug}`}>
+        <Link href={`${post.slug}`}>
           <p className="text-blue-700 hover:text-blue-900">{post.title}</p>
-          <p className="prose">{post.summary}</p>
+          <p className="prose">{post.desc}</p>
         </Link>
       </h2>
     </div>
@@ -33,8 +35,8 @@ const Home = ({ posts }: { posts: Zettel[] }) => {
 
       <h1 className="mb-8 text-3xl">My Digital Garden</h1>
 
-      {posts.map((post: Zettel, idx: number) => (
-        <PostCard key={idx} {...post} />
+      {posts.map((post: Zettel) => (
+        <PostCard key={post._id} {...post} />
       ))}
     </div>
   )
@@ -66,7 +68,7 @@ const AuthShowcase: React.FC = () => {
 
 export const getStaticProps = () => {
   const posts = allZettels.sort((a: Zettel, b) => {
-    return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))
+    return compareDesc(new Date(a.created), new Date(b.created))
   })
   return { props: { posts } }
 }

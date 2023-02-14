@@ -5,6 +5,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import remarkBreaks from 'remark-breaks';
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
@@ -16,34 +17,36 @@ const computedFields = {
 
 export const Zettel = defineDocumentType(() => ({
   name: 'Zettel',
-  filePathPattern: `**/*.mdx`,
+  filePathPattern: `notes/*.mdx`,
   contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
       required: true,
     },
-    publishedAt: {
-      type: 'date',
+    desc: {
+      type: 'string',
+      required: true
+    },
+    created: {
+      type: 'number',
       required: true,
     },
-    summary: {
-      type: 'string',
+    updated: {
+      type: 'number',
       required: true,
-    },
-    image: {
-      type: 'string',
     },
   },
   computedFields,
 }));
 
 export default makeSource({
-  contentDirPath: 'notes',
+  contentDirPath: '.',
   documentTypes: [Zettel],
   mdx: {
     remarkPlugins: [
       remarkGfm,
+      remarkBreaks,
       remarkMath,
     ],
     rehypePlugins: [
