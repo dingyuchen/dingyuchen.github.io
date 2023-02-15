@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 import { format, parseISO } from 'date-fns'
 import { Zettel, allZettels } from 'contentlayer/generated'
 import { useMDXComponent } from "next-contentlayer/hooks";
@@ -49,7 +50,7 @@ const PostLayout = ({ post }: { post: Zettel }) => {
                     </time>
                 </div>
 
-                <Page />
+                <Page components={{ Image }} />
             </article>
         </>
     )
