@@ -17,7 +17,7 @@ const computedFields = {
 
 export const Zettel = defineDocumentType(() => ({
   name: 'Zettel',
-  filePathPattern: `notes/*.mdx`,
+  filePathPattern: `**/*.md*`,
   contentType: 'mdx',
   fields: {
     title: {
@@ -41,7 +41,7 @@ export const Zettel = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-  contentDirPath: '.',
+  contentDirPath: 'notes',
   documentTypes: [Zettel],
   mdx: {
     remarkPlugins: [

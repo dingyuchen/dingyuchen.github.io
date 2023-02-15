@@ -10,14 +10,13 @@ import { allZettels, Zettel } from 'contentlayer/generated'
 
 const PostCard = (post: Zettel) => {
   const created = new Date(post.created)
-  console.log(post._raw.flattenedPath)
   return (
     <div className="mb-6">
       <time dateTime={created.toDateString()} className="block text-sm text-slate-600">
         {format(created, 'LLLL d, yyyy')}
       </time>
       <h2 className="text-lg">
-        <Link href={`${post.slug}`}>
+        <Link href={`/notes/${post.slug}`}>
           <p className="text-blue-700 hover:text-blue-900">{post.title}</p>
           <p className="prose">{post.desc}</p>
         </Link>

@@ -6,7 +6,7 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import { GetStaticProps } from 'next'
 
 export const getStaticPaths = () => {
-    const paths = allZettels.map((post) => `/${post.slug}`)
+    const paths = allZettels.map((post) => `/notes/${post.slug}`)
     return {
         paths,
         fallback: false,
@@ -19,7 +19,8 @@ const getFileNameWithoutExtension = (fileName: string) => {
 }
 
 export const getStaticProps: GetStaticProps = ({ params }) => {
-    const post = allZettels.find((post) => getFileNameWithoutExtension(post._raw.sourceFileName) === params?.slug)
+    // allZettels.forEach(post => console.log(post._raw))
+    const post = allZettels.find((post) => post._raw.flattenedPath === params?.slug)
     return {
         props: {
             post,
