@@ -1,0 +1,6 @@
+@import '@fontsource/source-sans-pro';
+@import '@fontsource/ibm-plex-mono';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
