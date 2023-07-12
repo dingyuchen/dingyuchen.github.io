@@ -6,10 +6,10 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
-      sans: ['"Source Sans Pro"', ...defaultTheme.fontFamily.sans],
-      serif: defaultTheme.fontFamily.serif,
+      sans: ['"Open Sans Variable"', ...defaultTheme.fontFamily.sans],
+      serif: ['Kaisei Tokumin', ...defaultTheme.fontFamily.serif],
       mono: ['"IBM Plex Mono"', ...defaultTheme.fontFamily.mono]
     }
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

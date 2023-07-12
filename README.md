@@ -5,3 +5,4 @@ Everything you need to build a Svelte project, powered by [`create-svelte`](http
 ## TODO
 
 - [ ] Add cssnano
+- [ ] Add kaisei for a serif font (names and headings, nav, etc)

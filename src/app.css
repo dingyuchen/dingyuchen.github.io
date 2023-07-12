@@ -1,6 +1,13 @@
-@import '@fontsource/source-sans-pro';
+/* Write your global styles here, in PostCSS syntax */
+@import '@fontsource/kaisei-tokumin';
+@import '@fontsource-variable/open-sans';
 @import '@fontsource/ibm-plex-mono';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @layer base {
+    h1 {
+        @apply mt-8 text-2xl;
+    }
+} */
