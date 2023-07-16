@@ -3,9 +3,10 @@ import { vitePreprocess } from '@sveltejs/kit/vite';
 import { escapeSvelte, mdsvex } from 'mdsvex';
 import shiki from "shiki";
 import remarkUnwrapImages from 'remark-unwrap-images';
-import remarkBreaks from 'remark-breaks';
 import remarkToc from 'remark-toc';
 import rehypeSlug from 'rehype-slug';
+import remarkMath from 'remark-math';
+import rehypeKatexSvelte from 'rehype-katex-svelte';
 
 
 /** @type {import('mdsvex').MdsvexOptions} */
@@ -26,8 +27,8 @@ const mdsvexOptions = {
 			return `{@html \`${html}\`}`
 		}
 	},
-	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkBreaks],
-	rehypePlugins: [rehypeSlug]
+	remarkPlugins: [remarkMath, remarkUnwrapImages, [remarkToc, { tight: true }]],
+	rehypePlugins: [rehypeKatexSvelte, rehypeSlug]
 }
 
 /** @type {import('@sveltejs/kit').Config} */

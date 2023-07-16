@@ -7,13 +7,18 @@ tags:
     - svelte
     - random
 ---
+
 ## TOC
 
 ## This is my second posttt
 
+$a = b + c$
+
 lorem ipsum adlsjfal;sdjfladskjfa sl
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor urna sed dui efficitur, eu lobortis ipsum venenatis. In vulputate eros commodo risus porta, sed laoreet purus pharetra. Proin dictum ex gravida urna scelerisque, pharetra tincidunt risus euismod. Integer at sodales leo. Nunc commodo cursus ex vel vehicula. Suspendisse sit amet laoreet tortor, dapibus tristique tellus. Nulla faucibus quam eu velit pulvinar sollicitudin. Praesent nec fringilla justo. In varius quam urna, id elementum ipsum rutrum eu.
+$$
+\frac{a}{b}
+$$
 
 ```js 
 const str = "hello world";

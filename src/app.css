@@ -2,6 +2,7 @@
 @import '@fontsource/kaisei-tokumin';
 @import '@fontsource-variable/open-sans';
 @import '@fontsource/ibm-plex-mono';
+@import "katex/dist/katex.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
