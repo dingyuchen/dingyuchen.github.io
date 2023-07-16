@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import Footer from './footer.svelte';
 	import Header from './header.svelte';
 </script>
 
@@ -9,5 +8,4 @@
 	<main class="m-4 mb-10">
 		<slot />
 	</main>
-	<Footer />
 </div>

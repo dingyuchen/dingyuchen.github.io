@@ -9,11 +9,11 @@
 </svelte:head>
 
 <article class="prose dark:prose-invert">
-	<h1 class="font-serif">Writing</h1>
+	<h2 class="font-serif">Writing</h2>
 	<p>Blogs, notes, tutorials, references, etc.</p>
 </article>
 
-<ul class="dark:text-slate-200">
+<ul class="w-96 min-w-full dark:text-slate-200">
 	{#each data.posts as post}
 		<li>
 			<a href={`/writing/${post.slug}`}>{post.title}</a>
@@ -22,3 +22,7 @@
 		</li>
 	{/each}
 </ul>
+<!-- footer -->
+<section class="flex flex-row-reverse justify-start w-full p-3 dark:text-slate-200">
+	<a href="/rss.xml" target="_blank" rel="noopener noreferrer">RSS</a>
+</section>

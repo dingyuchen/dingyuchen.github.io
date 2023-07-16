@@ -12,7 +12,7 @@
     }
 } */
 
-.prose img {
+.prose>img {
     @apply rounded-md shadow-xl;
 }
 

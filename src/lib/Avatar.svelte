@@ -1,5 +1,5 @@
 <img
-	class="rounded-full h-fit"
+	class="rounded-full shadow-xl"
 	src="https://github.com/dingyuchen.png"
 	alt="Headshot"
 	srcset="https://github.com/dingyuchen.png?size=150"
