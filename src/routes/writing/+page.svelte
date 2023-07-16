@@ -8,6 +8,11 @@
 	<title>Writing</title>
 </svelte:head>
 
+<article class="prose">
+	<h1 class="font-serif">Writing</h1>
+	<p>Blogs, notes, tutorials, references, etc.</p>
+</article>
+
 <ul>
 	{#each data.posts as post}
 		<li>

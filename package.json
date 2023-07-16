@@ -44,6 +44,9 @@
 		"@fontsource/ibm-plex-mono": "^5.0.4",
 		"@fontsource/kaisei-tokumin": "^5.0.5",
 		"devalue": "^4.3.2",
+		"rehype-pretty-code": "^0.10.0",
+		"shiki": "^0.14.3",
+		"shiki-twoslash": "^3.1.2",
 		"zod": "^3.21.4"
 	}
 }

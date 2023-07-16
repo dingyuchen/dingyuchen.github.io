@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { author } from '$lib/config.js';
-	import { formatDate } from '$lib/util.js';
+	import Avatar from '$lib/Avatar.svelte';
+	import { author } from '$lib/config';
+	import { formatDate } from '$lib/util';
 
 	export let data;
 </script>
@@ -9,16 +10,25 @@
 	<title>{author}</title>
 </svelte:head>
 
-<section class="prose lg:prose-xl md:prose-base dark:prose-invert">
-	<h2 class="font-serif">{author}</h2>
-	<p>
-		I am a software engineer currently working at Shopee. My interests lie in programming languages,
-		distributed systems. I dabble with frontend technologies in my free time.
-	</p>
-	<p>
-		This site serves as my portfolio, personal notes collection and blog. Built over the course of
-		several lunch breaks.
-	</p>
+<section>
+	<div class="flex flex-col justify-around items-top">
+		<div class="m-5 flex justify-center">
+			<Avatar />
+		</div>
+		<div class="prose lg:prose-lg">
+			<h1 class="font-serif text-center">About</h1>
+			<p>Hi, I'm YuChen.</p>
+			<p>
+				I am a software engineer currently working at Shopee. My interests lie in programming
+				languages, distributed systems and algorithms. I also dabble with frontend technologies in
+				my free time.
+			</p>
+			<p>
+				This site serves as my portfolio, personal notes collection and blog. Built over the course
+				of several lunch breaks.
+			</p>
+		</div>
+	</div>
 	<ul>
 		{#each data.posts as post}
 			<li>
