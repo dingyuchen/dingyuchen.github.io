@@ -23,7 +23,7 @@ async function getPosts() {
             posts.push(post)
         }
     }
-    posts.sort((first, second) => first.date.getTime() - second.date.getTime())
+    posts.sort((first, second) => second.date.getTime() - first.date.getTime())
     return posts
 }
 
