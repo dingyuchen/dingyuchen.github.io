@@ -11,3 +11,11 @@
         @apply mt-8 text-2xl;
     }
 } */
+
+.prose img {
+    @apply rounded-md shadow-xl;
+}
+
+pre.shiki {
+    @apply rounded-md shadow-xl;
+}

@@ -15,7 +15,7 @@
 		<div class="m-5 flex justify-center">
 			<Avatar />
 		</div>
-		<div class="prose lg:prose-lg">
+		<div class="prose lg:prose-lg dark:prose-invert">
 			<h1 class="font-serif text-center">About</h1>
 			<p>Hi, I'm YuChen.</p>
 			<p>

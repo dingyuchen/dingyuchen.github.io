@@ -1,7 +1,11 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { escapeSvelte, mdsvex } from 'mdsvex';
-import shiki from 'shiki';
+import shiki from "shiki";
+import remarkUnwrapImages from 'remark-unwrap-images';
+import remarkBreaks from 'remark-breaks';
+import remarkToc from 'remark-toc';
+import rehypeSlug from 'rehype-slug';
 
 
 /** @type {import('mdsvex').MdsvexOptions} */
@@ -16,22 +20,14 @@ const mdsvexOptions = {
 	highlight: {
 		highlighter: async (code, lang = 'text') => {
 			const highlighter = await shiki.getHighlighter({
-				theme: 'poimandres'
+				theme: 'nord'
 			})
-			// const h = highlighter.codeToHtml(code, { lang })
-			const h = shiki.renderToHtml(highlighter.codeToThemedTokens(code, lang), {
-				elements: {
-					pre({ className, style, children }) {
-						console.log(className)
-						return `<pre class="${className} shadow-xl" tabindex="0">${children}</pre>`
-					}
-				}
-			})
-			console.log(h)
-			const html = escapeSvelte(h)
+			const html = escapeSvelte(highlighter.codeToHtml(code, { lang }))
 			return `{@html \`${html}\`}`
 		}
 	},
+	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
+	rehypePlugins: [rehypeSlug]
 }
 
 /** @type {import('@sveltejs/kit').Config} */
