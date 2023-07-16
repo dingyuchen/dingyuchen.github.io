@@ -1,8 +1,10 @@
 # Personal Website
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Blazingly fast blog, powered by Sveltekit and Tailwind
 
 ## TODO
 
 - [ ] Add cssnano
-- [ ] Add kaisei for a serif font (names and headings, nav, etc)
+- [ ] incorporate vite-image-tools
+- [ ] Add giscus
+- [ ] Complete resume section

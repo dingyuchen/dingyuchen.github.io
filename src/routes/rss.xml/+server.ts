@@ -12,7 +12,7 @@ export async function GET({ fetch }) {
 		<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
 			<channel>
 				<title>${author}</title>
-				<description></description>
+				<description>${author}'s Blog</description>
 				<link>${url}</link>
 				<atom:link href="${url}/rss.xml" rel="self" type="application/rss+xml"/>
 				${posts
