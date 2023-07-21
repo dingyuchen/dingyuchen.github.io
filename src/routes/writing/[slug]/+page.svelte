@@ -3,6 +3,9 @@
 	import { formatDate } from '$lib/util.js';
 
 	export let data;
+	const publishedDate = new Date(data.metadata.date)
+	const editDate = new Date(data.metadata.edited)
+	const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 </script>
 
 <svelte:head>
@@ -16,9 +19,9 @@
 <article class="flex flex-col">
 	<hgroup class="mb-5 prose lg:prose-lg dark:prose-invert">
 		<h1 class="font-serif mb-1">{data.metadata.title}</h1>
-		<span>Published: {formatDate(new Date(data.metadata.date))}</span>
+		<span>Published: {formatDate(publishedDate)}, {weekday[publishedDate.getDay()]}</span>
 		{#if data.metadata.date !== data.metadata.edited}
-			<span>Edited: {formatDate(new Date(data.metadata.edited))}</span>
+			<span>Edited: {formatDate(editDate)}, {weekday[editDate.getDay()]}</span>
 		{/if}
 		<div>
 			{#each data.metadata.tags as tag}
