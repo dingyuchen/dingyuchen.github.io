@@ -17,7 +17,9 @@
 	<hgroup class="mb-5 prose lg:prose-lg dark:prose-invert">
 		<h1 class="font-serif mb-1">{data.metadata.title}</h1>
 		<span>Published: {formatDate(new Date(data.metadata.date))}</span>
-		<span>Edited: {formatDate(new Date(data.metadata.edited))}</span>
+		{#if data.metadata.date !== data.metadata.edited}
+			<span>Edited: {formatDate(new Date(data.metadata.edited))}</span>
+		{/if}
 		<div>
 			{#each data.metadata.tags as tag}
 				<span class="rounded-lg bg-slate-200 mx-1 px-1 dark:text-slate-900">&num;{tag}</span>

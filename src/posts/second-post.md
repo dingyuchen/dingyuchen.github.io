@@ -1,5 +1,6 @@
 ---
 title: Second Post
+description: This is the second post of this blog
 date: '2023-07-13'
 edited: '2023-07-13'
 publish: true

@@ -2,6 +2,7 @@ import { z } from "zod"
 
 export type Metadata = {
     title: string
+    description: string
     date: string
     edited: string
     publish: boolean
@@ -12,6 +13,7 @@ export const postValidator = z.object(
     {
         title: z.string(),
         slug: z.string(),
+        description: z.string(),
         date: z.date(),
         edited: z.date(),
         publish: z.boolean(),

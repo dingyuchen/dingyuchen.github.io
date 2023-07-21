@@ -10,8 +10,8 @@
 	<title>{author}</title>
 </svelte:head>
 
-<section>
-	<div class="flex flex-col justify-around items-top prose lg:prose-lg dark:prose-invert">
+<section class="w-full">
+	<div class="items-top prose lg:prose-lg dark:prose-invert">
 		<div class="m-3 flex justify-center">
 			<Avatar />
 		</div>
@@ -28,18 +28,20 @@
 		</p>
 		<h2 class="font-serif">Recent Posts</h2>
 	</div>
-	<ul class="dark:text-slate-300 mt-5">
+	<ul class="w-full dark:text-slate-300 mt-5">
 		{#each data.posts as post}
 			<li>
-				<div class="border rounded-md p-5 my-2 shadow-md prose lg:prose-lg">
-					<a href={`/writing/${post.slug}`}
-						><h3 class="text-xl m-2 mt-0 dark:text-slate-200">{post.title}</h3></a
-					>
-					{#each post.tags as tag}
-						<span class="rounded-lg bg-slate-200 mx-1 px-1 dark:text-slate-900">&num;{tag}</span>
-					{/each}
-					<span>{formatDate(post.date)}</span>
-				</div>
+				<a href={`/writing/${post.slug}`}>
+					<div class="border rounded-md p-5 my-2 shadow-md">
+						<h3 class="font-serif text-xl font-black mb-2 dark:text-slate-200">
+							{post.title}
+						</h3>
+						{#each post.tags as tag}
+							<span class="rounded-lg bg-slate-200 mx-1 px-1 dark:text-slate-900">&num;{tag}</span>
+						{/each}
+						<span class="dark:text-slate-200">{formatDate(post.date)}</span>
+					</div>
+				</a>
 			</li>
 		{/each}
 	</ul>

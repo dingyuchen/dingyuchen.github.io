@@ -1,5 +1,6 @@
 ---
 title: First Post
+description: This the first post written on this blog
 date: '2023-07-09'
 edited: '2023-07-09'
 publish: true
