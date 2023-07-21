@@ -26,14 +26,14 @@
 			This site serves as my portfolio, personal notes collection and blog. Built over the course of
 			several lunch breaks.
 		</p>
-		<h2 class="font-serif">Recent Posts</h2>
+		<h2>Recent Posts</h2>
 	</div>
 	<ul class="w-full dark:text-slate-300 mt-5">
 		{#each data.posts as post}
 			<li>
 				<a href={`/writing/${post.slug}`}>
 					<div class="border rounded-md p-5 my-2 shadow-md">
-						<h3 class="font-serif text-xl font-black mb-2 dark:text-slate-200">
+						<h3 class="text-xl font-bold mb-2 dark:text-slate-200">
 							{post.title}
 						</h3>
 						{#each post.tags as tag}
