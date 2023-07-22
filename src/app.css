@@ -1,6 +1,6 @@
 /* Write your global styles here, in PostCSS syntax */
 @import '@fontsource/kaisei-tokumin';
-@import '@fontsource-variable/open-sans';
+@import '@fontsource-variable/inter';
 @import '@fontsource/ibm-plex-mono';
 @import "katex/dist/katex.css";
 @tailwind base;

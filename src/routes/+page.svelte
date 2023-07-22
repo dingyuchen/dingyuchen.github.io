@@ -15,7 +15,7 @@
 		<div class="m-3 flex justify-center">
 			<Avatar />
 		</div>
-		<h1 class="font-serif">About</h1>
+		<h1>About</h1>
 		<p>Hi, I'm YuChen.</p>
 		<p>
 			I am a software engineer currently working at Shopee. My interests lie in programming

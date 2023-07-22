@@ -11,6 +11,8 @@ tags:
 
 ## TOC
 
+# h1 heading
+
 ## This is my second posttt
 
 $a = b + c$

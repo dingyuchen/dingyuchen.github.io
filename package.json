@@ -44,7 +44,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource-variable/open-sans": "^5.0.6",
+		"@fontsource-variable/inter": "^5.0.5",
 		"@fontsource/ibm-plex-mono": "^5.0.4",
 		"@fontsource/kaisei-tokumin": "^5.0.5",
 		"devalue": "^4.3.2",
