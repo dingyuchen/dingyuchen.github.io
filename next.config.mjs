@@ -3,8 +3,9 @@
  * for Docker builds.
  */
 await import("./src/env.mjs");
+const { withContentlayer } = await import('next-contentlayer');
 
-/** @type {import("next").NextConfig} */
-const config = {};
+// /** @type {import("next").NextConfig} */
+const config = { reactStrictMode: true, experimental: { ppr: true } };
 
-export default config;
+export default withContentlayer(config);
