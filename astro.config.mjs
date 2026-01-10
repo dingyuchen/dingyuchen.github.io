@@ -4,6 +4,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import org from 'astro-org';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [org()]
+  integrations: [org({
+    rehypePlugins: [rehypeHighlight, rehypeKatex]
+  })]
 });

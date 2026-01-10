@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About | BRUTAL.BLOG" description="About the author and this blog">
+	<section class="border-b-3 border-brutalist-black bg-brutalist-blue">
+		<div class="max-w-4xl mx-auto px-6 py-16 md:py-24">
+			<h1 class="text-5xl md:text-6xl font-bold mb-6">ABOUT</h1>
+			<p class="text-xl md:text-2xl">The human behind the brutalism.</p>
+		</div>
+	</section>
+
+	<section class="max-w-4xl mx-auto px-6 py-16">
+		<div class="grid md:grid-cols-3 gap-12">
+			<div class="md:col-span-2 prose">
+				<h2>Hello, World.</h2>
+				<p>
+					I'm a developer and designer who believes the web has become too polished,
+					too sanitized, and frankly, too boring. This blog is my rebellion against
+					the sea of sameness.
+				</p>
+				<p>
+					Here, you'll find thoughts on web development, design philosophy,
+					and the occasional hot take on tech culture. Everything is written
+					with the same brutal honesty that defines the aesthetic.
+				</p>
+				<h2>The Stack</h2>
+				<p>
+					This blog is built with:
+				</p>
+				<ul>
+					<li><strong>Astro</strong> — For blazing fast static sites</li>
+					<li><strong>Tailwind CSS</strong> — For utility-first styling</li>
+					<li><strong>Org Mode</strong> — For writing content the way it should be</li>
+				</ul>
+				<h2>Get in Touch</h2>
+				<p>
+					Want to chat? Find me on the usual platforms or send an email.
+					I'm always happy to discuss code, design, or the meaning of life.
+				</p>
+			</div>
+			<aside>
+				<div class="brutal-card bg-brutalist-yellow">
+					<h3 class="text-xl font-bold mb-4 text-brutalist-black">QUICK FACTS</h3>
+					<ul class="space-y-3 text-sm text-brutalist-black">
+						<li class="flex items-start gap-2">
+							<span class="font-bold">LOCATION:</span>
+							<span>The Internet</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-bold">TOOLS:</span>
+							<span>Emacs, TypeScript, Coffee</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="font-bold">CURRENTLY:</span>
+							<span>Building cool stuff</span>
+						</li>
+					</ul>
+				</div>
+			</aside>
+		</div>
+	</section>
+</Layout>
