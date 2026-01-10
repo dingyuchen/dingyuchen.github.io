@@ -6,23 +6,33 @@
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-brutalist-black: #1a1a1a;
-  --color-brutalist-white: #fafafa;
-  --color-brutalist-yellow: #facc15;
-  --color-brutalist-pink: #f472b6;
-  --color-brutalist-blue: #60a5fa;
-  --color-brutalist-green: #4ade80;
-  --color-brutalist-orange: #fb923c;
+  /* Gruvbox Light Mode (default) */
+  --color-brutalist-black: #3c3836;
+  --color-brutalist-white: #fbf1c7;
+  --color-brutalist-yellow: #d79921;
+  --color-brutalist-pink: #b16286;
+  --color-brutalist-blue: #458588;
+  --color-brutalist-green: #98971a;
+  --color-brutalist-orange: #d65d0e;
+  --color-brutalist-red: #cc241d;
+  --color-brutalist-aqua: #689d6a;
 
   --shadow-brutal: 4px 4px 0px 0px var(--color-brutalist-black);
   --shadow-brutal-lg: 8px 8px 0px 0px var(--color-brutalist-black);
   --shadow-brutal-hover: 6px 6px 0px 0px var(--color-brutalist-black);
 }
 
-/* Dark mode overrides */
+/* Dark mode overrides - Gruvbox Dark */
 .dark {
-  --color-brutalist-black: #fafafa;
-  --color-brutalist-white: #1a1a1a;
+  --color-brutalist-black: #ebdbb2;
+  --color-brutalist-white: #282828;
+  --color-brutalist-yellow: #fabd2f;
+  --color-brutalist-pink: #d3869b;
+  --color-brutalist-blue: #83a598;
+  --color-brutalist-green: #b8bb26;
+  --color-brutalist-orange: #fe8019;
+  --color-brutalist-red: #fb4934;
+  --color-brutalist-aqua: #8ec07c;
 
   --shadow-brutal: 4px 4px 0px 0px var(--color-brutalist-black);
   --shadow-brutal-lg: 8px 8px 0px 0px var(--color-brutalist-black);
@@ -43,7 +53,7 @@
   }
 
   .dark ::selection {
-    color: #1a1a1a;
+    color: #282828;
   }
 }
 
@@ -62,6 +72,44 @@
 
   .border-t-3 {
     border-top-width: 3px;
+  }
+
+  /* Ensure text on accent backgrounds has proper contrast in dark mode */
+  .dark .bg-brutalist-yellow .text-brutalist-black,
+  .dark .bg-brutalist-yellow.text-brutalist-black {
+    --color-brutalist-black: #3c3836;
+  }
+
+  .dark .bg-brutalist-pink .text-brutalist-black,
+  .dark .bg-brutalist-pink.text-brutalist-black {
+    --color-brutalist-black: #3c3836;
+  }
+
+  .dark .bg-brutalist-green .text-brutalist-black,
+  .dark .bg-brutalist-green.text-brutalist-black {
+    --color-brutalist-black: #3c3836;
+  }
+
+  .dark .bg-brutalist-orange .text-brutalist-black,
+  .dark .bg-brutalist-orange.text-brutalist-black {
+    --color-brutalist-black: #3c3836;
+  }
+
+  /* Restore inverted colors for bg-brutalist-black elements inside accent backgrounds */
+  .dark .bg-brutalist-yellow .bg-brutalist-black,
+  .dark .bg-brutalist-pink .bg-brutalist-black,
+  .dark .bg-brutalist-green .bg-brutalist-black,
+  .dark .bg-brutalist-orange .bg-brutalist-black {
+    --color-brutalist-black: #ebdbb2;
+    --color-brutalist-white: #282828;
+  }
+
+  /* Ensure borders on accent backgrounds stay dark in dark mode */
+  .dark .bg-brutalist-yellow.border-brutalist-black,
+  .dark .bg-brutalist-pink.border-brutalist-black,
+  .dark .bg-brutalist-green.border-brutalist-black,
+  .dark .bg-brutalist-orange.border-brutalist-black {
+    --color-brutalist-black: #3c3836;
   }
 }
 
@@ -90,6 +138,17 @@
   transition: all 150ms;
 }
 
+/* Ensure cards with accent backgrounds have dark borders/shadows in dark mode */
+.dark .brutal-card .bg-brutalist-yellow,
+.dark .brutal-card .bg-brutalist-pink,
+.dark .brutal-card .bg-brutalist-green,
+.dark .brutal-card .bg-brutalist-orange,
+.dark .brutal-card .bg-brutalist-blue {
+  --color-brutalist-black: #3c3836;
+  --shadow-brutal: 4px 4px 0px 0px #3c3836;
+  --shadow-brutal-hover: 6px 6px 0px 0px #3c3836;
+}
+
 .brutal-card:hover {
   box-shadow: var(--shadow-brutal-hover);
   transform: translate(-2px, -2px);
@@ -101,7 +160,7 @@
   border-style: solid;
   box-shadow: var(--shadow-brutal);
   background-color: var(--color-brutalist-yellow);
-  color: #1a1a1a;
+  color: #3c3836;
   padding: 0.75rem 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -156,19 +215,19 @@
 }
 
 .theme-toggle:hover {
-  background-color: #1a1a1a;
+  background-color: #3c3836;
 }
 
 .theme-toggle:hover svg {
-  color: #facc15;
+  color: #fabd2f;
 }
 
 .dark .theme-toggle:hover {
-  background-color: #fafafa;
+  background-color: #ebdbb2;
 }
 
 .dark .theme-toggle:hover svg {
-  color: #facc15;
+  color: #d79921;
 }
 
 /* Prose styles for blog content */
@@ -275,7 +334,7 @@
 .prose code {
   font-family: var(--font-mono);
   background-color: var(--color-brutalist-yellow);
-  color: #1a1a1a;
+  color: #3c3836;
   padding: 0.125rem 0.375rem;
   font-size: 0.875rem;
 }
@@ -296,4 +355,14 @@
 .prose hr {
   border-top: 3px solid var(--color-brutalist-black);
   margin: 3rem 0;
+}
+
+/* Shiki dual theme support */
+.dark .astro-code,
+.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
 }
