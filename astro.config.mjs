@@ -1,14 +1,15 @@
-import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
+// @ts-check
+import { defineConfig } from 'astro/config';
 
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
+
+import org from 'astro-org';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ding.gg",
-  integrations: [mdx(), sitemap(), tailwind()],
-  prefetch: {
-    prefetchAll: true,
+  vite: {
+    plugins: [tailwindcss()]
   },
+
+  integrations: [org()]
 });

@@ -1,23 +1,19 @@
 {
-  "name": "ding.gg",
+  "name": "agreeable-ablation",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.1",
-    "@astrojs/mdx": "^1.1.5",
-    "@astrojs/rss": "^3.0.0",
-    "@astrojs/sitemap": "^3.0.3",
-    "@astrojs/tailwind": "^5.0.2",
-    "@tailwindcss/typography": "^0.5.10",
-    "astro": "^3.6.4",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.3.2"
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.8",
+    "astro-org": "^4.0.0",
+    "tailwindcss": "^4.1.18",
+    "uniorg-parse": "^3.2.0",
+    "uniorg-rehype": "^2.2.0"
   }
 }
