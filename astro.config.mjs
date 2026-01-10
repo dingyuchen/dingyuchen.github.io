@@ -22,6 +22,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
+  site: 'https://dingyuchen.github.io',
   integrations: [org({
     rehypePlugins: [[rehypeShiki, shikiConfig], rehypeKatex]
   })]
