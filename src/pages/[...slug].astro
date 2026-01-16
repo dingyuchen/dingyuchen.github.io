@@ -18,12 +18,12 @@ const { Content } = await render(post);
 	<article>
 		<!-- Post Header -->
 		<header class="border-b-3 border-brutalist-black bg-brutalist-pink">
-			<div class="max-w-4xl mx-auto px-6 py-16">
-				<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-brutalist-black">
+			<div class="max-w-4xl mx-auto px-6 py-10">
+				<h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4 text-brutalist-black">
 					{post.data.title}
 				</h1>
 				{post.data.description && (
-					<p class="text-xl md:text-2xl mb-6 opacity-90 text-brutalist-black">
+					<p class="text-lg md:text-xl mb-4 opacity-90 text-brutalist-black">
 						{post.data.description}
 					</p>
 				)}
@@ -32,7 +32,7 @@ const { Content } = await render(post);
 						<time class="font-mono text-sm bg-brutalist-white text-brutalist-black px-3 py-1 brutal-border">
 							{new Date(post.data.date).toLocaleDateString('en-US', {
 								year: 'numeric',
-								month: 'long',
+								month: 'short',
 								day: 'numeric'
 							})}
 						</time>
@@ -42,14 +42,14 @@ const { Content } = await render(post);
 		</header>
 
 		<!-- Post Content -->
-		<div class="max-w-4xl mx-auto px-6 py-16">
+		<div class="max-w-4xl mx-auto px-6 py-10">
 			<div class="prose">
 				<Content />
 			</div>
 		</div>
 
 		<!-- Back Link -->
-		<div class="max-w-4xl mx-auto px-6 pb-16">
+		<div class="max-w-4xl mx-auto px-6 pb-10">
 			<a href="/" class="brutal-btn inline-block">
 				&larr; BACK TO ALL POSTS
 			</a>

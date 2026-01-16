@@ -34,7 +34,7 @@ cycle. It’s not easy, but it’s worth it. Here’s how:
 - Develop Process Orientation :: Enjoy the act of creating rather than fixating solely on the result.
 - Schedule Regular Breaks :: Plan rest periods to prevent burnout and maintain sustainable productivity
 
-** DOING Temporal Motivation Theory
+** Temporal Motivation Theory
 \[Motivation = \frac{Expectancy \times Value}{1 + Impulsiveness \times Delay} \]
 
 [[id:431967DA-7B8F-48AD-ACA0-16E9C3A6C845][helloworld]]
@@ -42,3 +42,4 @@ cycle. It’s not easy, but it’s worth it. Here’s how:
 #+begin_src cpp
   std::vector<int> list{10};
 #+end_src
+
