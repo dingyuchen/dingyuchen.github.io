@@ -16,7 +16,7 @@ const colors = ['bg-brutalist-yellow', 'bg-brutalist-pink', 'bg-brutalist-blue',
 <Layout>
 	<!-- Hero Section -->
 	<section class="border-b-3 border-brutalist-black bg-brutalist-yellow">
-		<div class="max-w-5xl mx-auto px-6 py-8 md:py-10">
+		<div class="max-w-5xl mx-auto px-6 py-8 md:py-10 bg-brutalist-yellow">
 			<h1 class="text-3xl md:text-5xl font-bold leading-tight mb-3 text-brutalist-black">
 				THOUGHTS.<br/>
 				CODE.<br/>
@@ -37,34 +37,34 @@ const colors = ['bg-brutalist-yellow', 'bg-brutalist-pink', 'bg-brutalist-blue',
 
 		<div class="grid gap-4">
 			{posts.map((post, index) => (
+					<a href={`/${post.slug}`}>
 				<article class="brutal-card group py-3 px-4">
-					<div class="flex flex-col md:flex-row gap-3">
-						<div class={`w-full md:w-24 h-20 md:h-auto ${colors[index % colors.length]} brutal-border flex items-center justify-center shrink-0`}>
-							<span class="text-2xl font-bold text-brutalist-black">{String(index + 1).padStart(2, '0')}</span>
-						</div>
-						<div class="flex-1">
-							<h3 class="text-lg md:text-xl font-bold mb-1 group-hover:text-brutalist-pink transition-colors">
-								<a href={`/${post.slug}`} class="hover:underline decoration-3 underline-offset-4">
+						<div class="flex flex-col md:flex-row gap-3">
+							<div class={`w-full md:w-24 h-20 md:h-auto ${colors[index % colors.length]} brutal-border flex items-center justify-center shrink-0`}>
+								<span class="text-2xl font-bold text-brutalist-black">{String(index + 1).padStart(2, '0')}</span>
+							</div>
+							<div class="flex-1">
+								<h3 class="text-lg md:text-xl font-bold mb-1 group-hover:text-brutalist-pink transition-colors hover:underline decoration-3 underline-offset-4">
 									{post.data.title}
-								</a>
-							</h3>
-							{post.data.description && (
-								<p class="text-sm opacity-80 mb-2">
-									{post.data.description}
-								</p>
-							)}
-							{post.data.date && (
-								<time class="font-mono text-xs">
-									{new Date(post.data.date).toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: 'short',
-										day: 'numeric'
-									})}
-								</time>
-							)}
+								</h3>
+								{post.data.description && (
+									<p class="text-sm opacity-80 mb-2">
+										{post.data.description}
+									</p>
+								)}
+								{post.data.date && (
+									<time class="font-mono text-xs">
+										{new Date(post.data.date).toLocaleDateString('en-US', {
+											year: 'numeric',
+											month: 'short',
+											day: 'numeric'
+										})}
+									</time>
+								)}
+							</div>
 						</div>
-					</div>
 				</article>
+					</a>
 			))}
 		</div>
 	</section>

@@ -9,13 +9,13 @@
   /* Gruvbox Light Mode (default) */
   --color-brutalist-black: #3c3836;
   --color-brutalist-white: #fbf1c7;
-  --color-brutalist-yellow: #d79921;
-  --color-brutalist-pink: #b16286;
-  --color-brutalist-blue: #458588;
-  --color-brutalist-green: #98971a;
-  --color-brutalist-orange: #d65d0e;
-  --color-brutalist-red: #cc241d;
-  --color-brutalist-aqua: #689d6a;
+  --color-brutalist-yellow: #fabd2f;
+  --color-brutalist-pink: #d3869b;
+  --color-brutalist-blue: #83a598;
+  --color-brutalist-green: #b8bb26;
+  --color-brutalist-orange: #fe8019;
+  --color-brutalist-red: #fb4934;
+  --color-brutalist-aqua: #8ec07c;
 
   --shadow-brutal: 4px 4px 0px 0px var(--color-brutalist-black);
   --shadow-brutal-lg: 8px 8px 0px 0px var(--color-brutalist-black);
@@ -26,13 +26,13 @@
 .dark {
   --color-brutalist-black: #ebdbb2;
   --color-brutalist-white: #282828;
-  --color-brutalist-yellow: #fabd2f;
-  --color-brutalist-pink: #d3869b;
-  --color-brutalist-blue: #83a598;
-  --color-brutalist-green: #b8bb26;
-  --color-brutalist-orange: #fe8019;
-  --color-brutalist-red: #fb4934;
-  --color-brutalist-aqua: #8ec07c;
+  --color-brutalist-yellow: #d79921;
+  --color-brutalist-pink: #b16286;
+  --color-brutalist-blue: #458588;
+  --color-brutalist-green: #98971a;
+  --color-brutalist-orange: #d65d0e;
+  --color-brutalist-red: #cc241d;
+  --color-brutalist-aqua: #689d6a;
 
   --shadow-brutal: 4px 4px 0px 0px var(--color-brutalist-black);
   --shadow-brutal-lg: 8px 8px 0px 0px var(--color-brutalist-black);
@@ -75,23 +75,23 @@
   }
 
   /* Ensure text on accent backgrounds has proper contrast in dark mode */
-  .dark .bg-brutalist-yellow .text-brutalist-black {
+  .dark .bg-brutalist-yellow>.text-brutalist-black {
     --color-brutalist-black: #3c3836;
   }
 
-  .dark .bg-brutalist-pink .text-brutalist-black {
+  .dark .bg-brutalist-pink>.text-brutalist-black {
     --color-brutalist-black: #3c3836;
   }
 
-  .dark .bg-brutalist-green .text-brutalist-black {
+  .dark .bg-brutalist-green>.text-brutalist-black {
     --color-brutalist-black: #3c3836;
   }
 
-  .dark .bg-brutalist-orange .text-brutalist-black {
+  /* .dark .bg-brutalist-orange>.text-brutalist-black {
     --color-brutalist-black: #3c3836;
-  }
+  } */
 
-  .dark .bg-brutalist-blue .text-brutalist-black {
+  .dark .bg-brutalist-blue>.text-brutalist-black {
     --color-brutalist-black: #3c3836;
   }
 
