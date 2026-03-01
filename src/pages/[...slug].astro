@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection, render } from 'astro:content';
+import Layout from "../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = await getCollection("blog");
 	return posts.map((post) => ({
 		params: { slug: post.slug },
 		props: post,
@@ -14,29 +14,33 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title}`} description={post.data.description}>
+<Layout title={post.data.title}>
 	<article>
 		<header class="border-b border-gray-200 dark:border-gray-800">
-			<div class="max-w-4xl mx-auto px-6 py-10">
-				<h1 class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-3 text-gray-900 dark:text-gray-100">
+			<div class="max-w-4xl mx-auto px-6 py-5">
+				<h1
+					class="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-3 text-gray-900 dark:text-gray-100"
+				>
 					{post.data.title}
 				</h1>
-				{post.data.description && (
-					<p class="text-base md:text-lg mb-4 text-gray-600 dark:text-gray-400">
-						{post.data.description}
-					</p>
-				)}
-				{post.data.date && (
-					<div class="flex items-center gap-4">
-						<time class="font-mono text-sm text-gray-500 dark:text-gray-500">
-							{new Date(post.data.date).toLocaleDateString('en-US', {
-								year: 'numeric',
-								month: 'short',
-								day: 'numeric'
-							})}
-						</time>
-					</div>
-				)}
+				{
+					post.data.date && (
+						<div class="flex items-center gap-4">
+							<span class="font-mono text-sm text-gray-500 dark:text-gray-500">
+								Published:{" "}
+								<time>
+									{new Date(
+										post.data.date,
+									).toLocaleDateString("en-US", {
+										year: "numeric",
+										month: "short",
+										day: "numeric",
+									})}
+								</time>
+							</span>
+						</div>
+					)
+				}
 			</div>
 		</header>
 
@@ -47,7 +51,10 @@ const { Content } = await render(post);
 		</div>
 
 		<div class="max-w-4xl mx-auto px-6 pb-10">
-			<a href="/" class="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+			<a
+				href="/"
+				class="inline-block text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+			>
 				&larr; Back to all posts
 			</a>
 		</div>

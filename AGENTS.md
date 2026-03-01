@@ -19,13 +19,13 @@ This is an Astro blog website using:
 bun install
 
 # Start development server (http://localhost:4321)
-bun dev
+bun run dev
 
 # Build for production
-bun build
+bun run build
 
 # Preview production build locally
-bun preview
+bun run preview
 
 # Run Astro CLI commands
 bun astro <command>
@@ -39,12 +39,6 @@ bun astro check
 This project does not have a test framework configured.
 
 ## Code Style Guidelines
-
-### TypeScript
-
-- Strict mode enabled via `astro/tsconfigs/strict`
-- Always define types for component props using `interface Props`
-- Use optional types (`?`) for optional props
 
 ### Imports
 
