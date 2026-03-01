@@ -29,7 +29,7 @@ Content collections provide type-safe frontmatter and a great developer experien
 
 ** Why I Chose Astro
 
-1. *Performance by default* — No JavaScript unless you need it
+1. *Performance by default* :: No JavaScript unless you need it
 2. *Framework agnostic* — Use React, Vue, Svelte, or nothing
 3. *Great DX* — Hot reloading, TypeScript, and more
 

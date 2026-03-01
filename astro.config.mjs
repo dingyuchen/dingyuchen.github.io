@@ -9,8 +9,8 @@ import rehypeKatex from 'rehype-katex';
 
 const shikiConfig = {
   themes: {
-    light: 'vitesse-light',
-    dark: 'vitesse-dark',
+    light: 'catppuccin-latte',
+    dark: 'catppuccin-macchiato',
   },
   defaultColor: 'light',
   wrap: true,

@@ -2,27 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About | BRUTAL.BLOG" description="About the author and this blog">
-	<section class="border-b-3 border-brutalist-black bg-brutalist-blue">
-		<div class="max-w-4xl mx-auto px-6 py-10 md:py-12 bg-brutalist-blue">
-			<h1 class="text-4xl md:text-5xl font-bold mb-4 text-brutalist-black">ABOUT</h1>
-			<p class="text-lg md:text-xl text-brutalist-black">The human behind the brutalism.</p>
+<Layout title="About | My Blog" description="About the author and this blog">
+	<section class="border-b border-gray-200 dark:border-gray-800">
+		<div class="max-w-4xl mx-auto px-6 py-10 md:py-12">
+			<h1 class="text-3xl md:text-4xl font-bold mb-3 text-gray-900 dark:text-gray-100">About</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-400">The human behind the blog.</p>
 		</div>
 	</section>
 
 	<section class="max-w-4xl mx-auto px-6 py-10">
 		<div class="grid md:grid-cols-3 gap-8">
-			<div class="md:col-span-2 prose">
+			<div class="md:col-span-2 prose dark:prose-invert">
 				<h2>Hello, World.</h2>
 				<p>
-					I'm a developer and designer who believes the web has become too polished,
-					too sanitized, and frankly, too boring. This blog is my rebellion against
-					the sea of sameness.
-				</p>
-				<p>
-					Here, you'll find thoughts on web development, design philosophy,
-					and the occasional hot take on tech culture. Everything is written
-					with the same brutal honesty that defines the aesthetic.
+					I'm a developer and designer who writes about web development, 
+					design philosophy, and the occasional hot take on tech culture.
 				</p>
 				<h2>The Stack</h2>
 				<p>
@@ -31,7 +25,7 @@ import Layout from '../layouts/Layout.astro';
 				<ul>
 					<li><strong>Astro</strong> — For blazing fast static sites</li>
 					<li><strong>Tailwind CSS</strong> — For utility-first styling</li>
-					<li><strong>Org Mode</strong> — For writing content the way it should be</li>
+					<li><strong>Shiki</strong> — For beautiful syntax highlighting</li>
 				</ul>
 				<h2>Get in Touch</h2>
 				<p>
@@ -40,19 +34,19 @@ import Layout from '../layouts/Layout.astro';
 				</p>
 			</div>
 			<aside>
-				<div class="brutal-card bg-brutalist-yellow">
-					<h3 class="text-xl font-bold mb-4 text-brutalist-black">QUICK FACTS</h3>
-					<ul class="space-y-3 text-sm text-brutalist-black">
+				<div class="border border-gray-200 dark:border-gray-800 rounded-lg p-4">
+					<h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Quick Facts</h3>
+					<ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
 						<li class="flex items-start gap-2">
-							<span class="font-bold">LOCATION:</span>
+							<span class="font-medium">Location:</span>
 							<span>The Internet</span>
 						</li>
 						<li class="flex items-start gap-2">
-							<span class="font-bold">TOOLS:</span>
-							<span>Emacs, TypeScript, Coffee</span>
+							<span class="font-medium">Tools:</span>
+							<span>VS Code, TypeScript, Coffee</span>
 						</li>
 						<li class="flex items-start gap-2">
-							<span class="font-bold">CURRENTLY:</span>
+							<span class="font-medium">Currently:</span>
 							<span>Building cool stuff</span>
 						</li>
 					</ul>

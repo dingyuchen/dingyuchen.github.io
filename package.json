@@ -9,8 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.8",
+    "astro": "5.18.0",
     "astro-org": "^4.0.0",
     "katex": "^0.16.27",
     "rehype-highlight": "^7.0.2",
