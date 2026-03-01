@@ -53,6 +53,10 @@ const {
 				const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 				setTheme(current === 'dark' ? 'light' : 'dark');
 			};
+
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+				setTheme(e.matches ? 'dark' : 'light');
+			});
 		</script>
 
 		<title>{title}</title>
