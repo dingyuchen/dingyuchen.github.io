@@ -14,7 +14,7 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | My Blog`} description={post.data.description}>
+<Layout title={`${post.data.title}`} description={post.data.description}>
 	<article>
 		<header class="border-b border-gray-200 dark:border-gray-800">
 			<div class="max-w-4xl mx-auto px-6 py-10">
