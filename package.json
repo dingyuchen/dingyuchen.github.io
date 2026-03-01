@@ -9,15 +9,16 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/mdx": "^4.3.13",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "5.18.0",
-    "astro-org": "^4.0.0",
     "katex": "^0.16.27",
     "rehype-highlight": "^7.0.2",
     "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.18",
-    "uniorg-parse": "^3.2.0",
-    "uniorg-rehype": "^2.2.0"
+    "typescript": "^5.9.3"
   }
 }

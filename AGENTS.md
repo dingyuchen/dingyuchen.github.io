@@ -8,7 +8,7 @@ This is an Astro blog website using:
 - **Framework**: Astro 5.18.0
 - **Styling**: Tailwind CSS 4.x
 - **Content**: Astro content collections with Zod schema validation
-- **Format**: Org-mode files via astro-org
+- **Format**: MDX files via @astrojs/mdx
 - **Package Manager**: Bun
 - **TypeScript**: Strict mode enabled
 
@@ -90,7 +90,7 @@ const { title, count = 0 } = Astro.props;
 ### Content Collections
 
 - Define schemas in `src/content/config.ts` using Zod
-- Blog posts go in `src/content/blog/` as .org files
+- Blog posts go in `src/content/blog/` as .mdx files
 
 ```typescript
 import { defineCollection, z } from 'astro:content';
@@ -118,7 +118,7 @@ export const collections = { blog };
 ```
 src/
 ├── components/     # Reusable UI components
-├── content/blog/   # Blog posts (.org files)
+├── content/blog/   # Blog posts (.mdx files)
 ├── content/config.ts # Content collection schemas
 ├── layouts/        # Page layouts
 ├── pages/          # Route pages
@@ -164,9 +164,10 @@ export async function getStaticPaths() {
 
 - `astro` - Core framework
 - `@tailwindcss/vite` - Tailwind CSS integration
-- `astro-org` - Org-mode support
+- `@astrojs/mdx` - MDX support
 - `rehype-katex` - Math rendering
 - `rehype-highlight` - Syntax highlighting
+- `remark-math` - Math parsing
 
 ## Notes
 

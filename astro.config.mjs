@@ -3,9 +3,11 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import org from 'astro-org';
 import { rehypeShiki } from '@astrojs/markdown-remark';
 import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
+
+import mdx from '@astrojs/mdx';
 
 const shikiConfig = {
   themes: {
@@ -23,7 +25,8 @@ export default defineConfig({
   },
 
   site: 'https://dingyuchen.github.io',
-  integrations: [org({
+  integrations: [mdx({
+    remarkPlugins: [remarkMath],
     rehypePlugins: [[rehypeShiki, shikiConfig], rehypeKatex]
   })]
 });
