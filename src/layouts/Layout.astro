@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import 'katex/dist/katex.min.css';
+import { Font } from 'astro:assets';
 import { entrypoints } from '../utils/entrypoints';
 
 interface Props {
@@ -22,6 +23,8 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/ding.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<Font cssVariable="--font-sans" />
+		<Font cssVariable="--font-mono" />
 
 
 		<script is:inline define:vars={{ entrypoints }}>

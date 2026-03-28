@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -22,13 +22,33 @@ export const shikiThemes = shikiConfig.themes;
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'IBM Plex Sans',
+      cssVariable: '--font-sans',
+      weights: [300, 400, 500, 600, 700],
+      styles: ['normal'],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'IBM Plex Mono',
+      cssVariable: '--font-mono',
+      weights: [300, 400, 500, 600, 700],
+      styles: ['normal'],
+      subsets: ['latin'],
+    },
+  ],
 
   site: 'https://dingyuchen.github.io',
+
   integrations: [mdx({
     remarkPlugins: [remarkMath],
     rehypePlugins: [[rehypeShiki, shikiConfig], rehypeKatex]
-  })]
+  })],
+
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
