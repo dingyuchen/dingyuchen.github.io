@@ -18,6 +18,8 @@ const shikiConfig = {
   wrap: true,
 };
 
+export const shikiThemes = shikiConfig.themes;
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
