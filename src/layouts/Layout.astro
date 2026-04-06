@@ -41,7 +41,7 @@ const {
 					: "light";
 			};
 
-			const setTheme = (doc, theme) => {
+			const setTheme = (theme, doc = document) => {
 				if (theme === "dark") {
 					doc.documentElement.classList.add("dark");
 				} else {
@@ -51,7 +51,7 @@ const {
 				localStorage.setItem("theme", theme);
 			};
 
-			setTheme(document, getTheme());
+			setTheme(getTheme());
 
 			window.toggleTheme = () => {
 				const current = document.documentElement.classList.contains(
@@ -68,7 +68,7 @@ const {
 					setTheme(e.matches ? "dark" : "light");
 				});
 			document.addEventListener("astro:before-swap", (event) => {
-				setTheme(event.newDocument, getTheme());
+				setTheme(getTheme(), event.newDocument);
 			});
 		</script>
 
