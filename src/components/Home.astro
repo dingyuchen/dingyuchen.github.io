@@ -1,19 +1,32 @@
 ---
 import { entrypointStyles, entrypoints } from "../utils/entrypoints";
 
-const { highlighted } =
-	entrypoints[Math.floor(Math.random() * entrypoints.length)];
-const html = highlighted.replace(
-	/class="expressive-code"/g,
-	'class="nav-code"',
-);
 const scopedStyles = entrypointStyles.replace(
 	/\.expressive-code/g,
 	".nav-code",
 );
+
+const renderedEntrypoints = entrypoints.map(({ highlighted }) =>
+	highlighted.replace(/class="expressive-code"/g, 'class="nav-code"'),
+);
 ---
 
 <style set:html={scopedStyles}></style>
-<a href="/" id="main-link" set:html={html} aria-label="Home" class="not-prose">
-	<!-- The content of this link will be replaced by the highlighted code snippet -->
-</a>
+{
+	renderedEntrypoints.map((html, i) => (
+		<a
+			href="/"
+			data-entry
+			class="not-prose"
+			class:list={[{ hidden: i !== 0 }]}
+			set:html={html}
+			aria-label="Home"
+		/>
+	))
+}
+<script is:inline>
+	const entries = document.querySelectorAll("[data-entry]");
+	const idx = Math.floor(Math.random() * entries.length);
+	entries[0].classList.toggle("hidden");
+	entries[idx].classList.toggle("hidden");
+</script>
