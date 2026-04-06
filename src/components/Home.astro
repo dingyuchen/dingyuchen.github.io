@@ -17,7 +17,7 @@ const renderedEntrypoints = entrypoints.map(({ highlighted }) =>
 		<a
 			href="/"
 			data-entry
-			class="not-prose"
+			class="not-prose max-w-1/2 truncate"
 			class:list={[{ hidden: i !== 0 }]}
 			set:html={html}
 			aria-label="Home"
