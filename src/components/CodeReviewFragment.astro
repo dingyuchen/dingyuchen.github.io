@@ -1,58 +1,21 @@
 ---
+import { Code } from "astro-expressive-code/components";
 interface Props {
   comment: string;
+  body: string;
   language?: string;
 }
 
-const { comment, language = "cpp" } = Astro.props;
-
-const code = await Astro.slots.render("default");
-const rawCode = code.replace(/<[^>]*>/g, "").trim();
-
-const shikiConfig = {
-  themes: {
-    light: shikiThemes.light,
-    dark: shikiThemes.dark,
-  },
-  defaultColor: "light",
-};
-
-// Wrap the raw code in a code element with the language class
-const codeElement = `<code class="language-${language}">${rawCode}</code>`;
-// Process with rehypeShiki to get the highlighted HTML with astro classes
-const processed = await rehype()
-  .use(rehypeShiki, shikiConfig)
-  .process(codeElement);
-const html = String(processed);
+const { comment, body, language = "cpp" } = Astro.props;
 ---
 
 <div
   class="my-6 rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden bg-[#f6f8fa] dark:bg-[#1f2428]"
 >
-  <style>
-    .line-number {
-      padding: 0 0.5rem;
-      display: inline-block;
-      margin-right: 1rem;
-      text-align: right;
-      color: #6e7781;
-      user-select: none;
-    }
-    :global([data-theme="dark"]) .line-number {
-      color: #8b949e;
-    }
-  </style>
-  <div
-    class="px-4 py-2 text-xs font-mono border-b border-neutral-200 dark:border-neutral-700"
+  <Code lang={language} code={body} useDiffSyntax />
+  <blockquote
+    class="p-4 text-sm italic bg-neutral-100 dark:bg-neutral-800 border-l-4 border-neutral-300 dark:border-neutral-600"
   >
-    Code Review
-  </div>
-  <div class="not-prose overflow-x-auto" set:html={html} />
-  <div
-    class="bg-blue-50 dark:bg-blue-950/30 px-4 py-3 border-t border-neutral-200 dark:border-neutral-700"
-  >
-    <blockquote class="not-prose text-neutral-700 dark:text-neutral-300 italic">
-      {comment}
-    </blockquote>
-  </div>
+    {comment}
+  </blockquote>
 </div>

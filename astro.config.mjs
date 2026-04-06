@@ -3,13 +3,14 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import expressiveCode from 'astro-expressive-code';
 import rehypeExpressiveCode from 'rehype-expressive-code';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
 import mdx from '@astrojs/mdx';
 import sitemap from "@astrojs/sitemap"
-import { rehypeExpressiveCodeOptions } from './src/utils/entrypoints';
+import { rehypeExpressiveCodeOptions } from './ec.config.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,6 +36,7 @@ export default defineConfig({
   site: 'https://dingyuchen.github.io',
 
   integrations: [
+    expressiveCode(),
     mdx({
       syntaxHighlight: false,
       remarkPlugins: [remarkMath],

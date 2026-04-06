@@ -1,6 +1,7 @@
 import { ExpressiveCodeBlock, type RehypeExpressiveCodeOptions } from 'rehype-expressive-code';
 import { toHtml } from 'rehype-expressive-code/hast';
 import { createRenderer } from 'rehype-expressive-code';
+import { rehypeExpressiveCodeOptions } from '../../ec.config.mjs';
 
 const codes = [
 	{ lang: 'cpp', code: 'int main(int argc, char* argv[])' },
@@ -12,21 +13,8 @@ const codes = [
 ] as const;
 
 
-const themeMap: Record<string, string> = {
-	'catppuccin-latte': 'light',
-	'catppuccin-macchiato': 'dark'
-};
-
-export const rehypeExpressiveCodeOptions: RehypeExpressiveCodeOptions = {
-	themes: ['catppuccin-latte', 'catppuccin-macchiato'],
-	themeCssSelector: (theme, context) => {
-		return `[data-theme='${themeMap[theme.name]}']`;
-	},
-	useDarkModeMediaQuery: false,
-};
-
 const renderer = await createRenderer({
-	...rehypeExpressiveCodeOptions,
+	...rehypeExpressiveCodeOptions as RehypeExpressiveCodeOptions,
 	frames: false,
 });
 
