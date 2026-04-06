@@ -83,7 +83,7 @@ const { title, count = 0 } = Astro.props;
 
 ### Content Collections
 
-- Define schemas in `src/content/config.ts` using Zod
+- Define schemas in `src/content.config.ts` using Zod
 - Blog posts go in `src/content/blog/` as .mdx files
 
 ```typescript
@@ -113,7 +113,7 @@ export const collections = { blog };
 src/
 ├── components/     # Reusable UI components
 ├── content/blog/   # Blog posts (.mdx files)
-├── content/config.ts # Content collection schemas
+├── content.config.ts # Content collection schemas
 ├── layouts/        # Page layouts
 ├── pages/          # Route pages
 └── styles/         # Global CSS

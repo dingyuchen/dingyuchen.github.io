@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog")).sort((a, b) => {
+const posts = (await getCollection("blog")).filter((post) => !post.data.hidden).sort((a, b) => {
 	const dateA = a.data.date ? new Date(a.data.date).valueOf() : 0;
 	const dateB = b.data.date ? new Date(b.data.date).valueOf() : 0;
 	return dateB - dateA;
