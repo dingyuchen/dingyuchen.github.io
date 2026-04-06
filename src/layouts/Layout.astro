@@ -1,17 +1,18 @@
 ---
 import "../styles/global.css";
-import "katex/dist/katex.min.css";
 import { Font } from "astro:assets";
 import HomeButton from "../components/Home.astro";
-import { title } from "../../astro.config.mjs";
+import { ClientRouter, fade } from "astro:transitions";
 
 interface Props {
 	title?: string;
 	description?: string;
 }
 
-const { description = "Bits of myself I want to show to the internet" } =
-	Astro.props;
+const {
+	title = "2.5 Culture SWE",
+	description = "Bits of myself I want to show to the internet",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -23,6 +24,7 @@ const { description = "Bits of myself I want to show to the internet" } =
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<ClientRouter fallback="none" />
 		<Font cssVariable="--font-sans" />
 		<Font cssVariable="--font-mono" />
 
@@ -39,17 +41,17 @@ const { description = "Bits of myself I want to show to the internet" } =
 					: "light";
 			};
 
-			const setTheme = (theme) => {
+			const setTheme = (doc, theme) => {
 				if (theme === "dark") {
-					document.documentElement.classList.add("dark");
+					doc.documentElement.classList.add("dark");
 				} else {
-					document.documentElement.classList.remove("dark");
+					doc.documentElement.classList.remove("dark");
 				}
-				document.documentElement.setAttribute("data-theme", theme);
+				doc.documentElement.setAttribute("data-theme", theme);
 				localStorage.setItem("theme", theme);
 			};
 
-			setTheme(getTheme());
+			setTheme(document, getTheme());
 
 			window.toggleTheme = () => {
 				const current = document.documentElement.classList.contains(
@@ -65,6 +67,9 @@ const { description = "Bits of myself I want to show to the internet" } =
 				.addEventListener("change", (e) => {
 					setTheme(e.matches ? "dark" : "light");
 				});
+			document.addEventListener("astro:before-swap", (event) => {
+				setTheme(event.newDocument, getTheme());
+			});
 		</script>
 
 		<title>{title}</title>

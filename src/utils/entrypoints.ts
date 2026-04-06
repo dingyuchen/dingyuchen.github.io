@@ -5,7 +5,6 @@ import { createRenderer } from 'rehype-expressive-code';
 const codes = [
 	{ lang: 'cpp', code: 'int main(int argc, char* argv[])' },
 	{ lang: 'java', code: 'public static void main(String[] args)' },
-	{ lang: 'javascript', code: 'function main()' },
 	{ lang: 'rust', code: 'fn main()' },
 	{ lang: 'python', code: 'if __name__ == "__main__":' },
 	{ lang: 'go', code: 'func main()' },

@@ -25,8 +25,10 @@ const renderedEntrypoints = entrypoints.map(({ highlighted }) =>
 	))
 }
 <script is:inline>
-	const entries = document.querySelectorAll("[data-entry]");
-	const idx = Math.floor(Math.random() * entries.length);
-	entries[0].classList.toggle("hidden");
-	entries[idx].classList.toggle("hidden");
+	document.addEventListener("astro:page-load", () => {
+		const entries = document.querySelectorAll("[data-entry]");
+		entries.forEach((entry) => entry.classList.toggle("hidden", true));
+		const idx = Math.floor(Math.random() * entries.length);
+		entries[idx].classList.toggle("hidden");
+	});
 </script>

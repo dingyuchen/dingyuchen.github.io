@@ -11,8 +11,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from "@astrojs/sitemap"
 import { rehypeExpressiveCodeOptions } from './src/utils/entrypoints';
 
-export const title = '2.5 Culture SWE';
-
 // https://astro.build/config
 export default defineConfig({
   fonts: [
