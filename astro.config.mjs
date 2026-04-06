@@ -3,28 +3,15 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
-import { rehypeShiki } from '@astrojs/markdown-remark';
+import rehypeExpressiveCode from 'rehype-expressive-code';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
 import mdx from '@astrojs/mdx';
 import sitemap from "@astrojs/sitemap"
-import rehypeExpressiveCode from 'rehype-expressive-code'
+import { rehypeExpressiveCodeOptions } from './src/utils/entrypoints';
 
-const shikiConfig = {
-  themes: {
-    light: 'catppuccin-latte',
-    dark: 'catppuccin-macchiato',
-  },
-  defaultColor: 'light',
-  wrap: true,
-};
-
-const expressiveCodeOptions = {
-  shiki: shikiConfig
-}
-
-export const shikiThemes = shikiConfig.themes;
+export const title = '2.5 Culture SWE';
 
 // https://astro.build/config
 export default defineConfig({
@@ -53,7 +40,7 @@ export default defineConfig({
     mdx({
       syntaxHighlight: false,
       remarkPlugins: [remarkMath],
-      rehypePlugins: [[rehypeExpressiveCode, expressiveCodeOptions], rehypeKatex],
+      rehypePlugins: [[rehypeExpressiveCode, rehypeExpressiveCodeOptions], rehypeKatex],
     }),
     sitemap()],
 

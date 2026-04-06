@@ -1,0 +1,19 @@
+---
+import { entrypointStyles, entrypoints } from "../utils/entrypoints";
+
+const { highlighted } =
+	entrypoints[Math.floor(Math.random() * entrypoints.length)];
+const html = highlighted.replace(
+	/class="expressive-code"/g,
+	'class="nav-code"',
+);
+const scopedStyles = entrypointStyles.replace(
+	/\.expressive-code/g,
+	".nav-code",
+);
+---
+
+<style set:html={scopedStyles}></style>
+<a href="/" id="main-link" set:html={html} aria-label="Home" class="not-prose">
+	<!-- The content of this link will be replaced by the highlighted code snippet -->
+</a>

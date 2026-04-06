@@ -1,57 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => {
-		const dateA = a.data.date ? new Date(a.data.date).valueOf() : 0;
-		const dateB = b.data.date ? new Date(b.data.date).valueOf() : 0;
-		return dateB - dateA;
-	}
-);
+const posts = (await getCollection("blog")).sort((a, b) => {
+	const dateA = a.data.date ? new Date(a.data.date).valueOf() : 0;
+	const dateB = b.data.date ? new Date(b.data.date).valueOf() : 0;
+	return dateB - dateA;
+});
 const snippetLength = 160;
 const generateSnippet = (body: string) => {
-  const text = body.replace(/[#*`\[\]]/g, '').trim();
-  return text.length > snippetLength ? text.slice(0, snippetLength).trim() + '...' : text;
+	const text = body.replace(/[#*`\[\]]/g, "").trim();
+	return text.length > snippetLength
+		? text.slice(0, snippetLength).trim() + "..."
+		: text;
 };
 ---
 
 <Layout>
 	<section class="border-b border-gray-200 dark:border-gray-800">
 		<div class="max-w-5xl mx-auto px-6 py-5 md:py-6">
-			<h1 class="text-2xl font-mono md:text-3xl lg:text-4xl font-bold leading-tight mb-3 text-gray-900 dark:text-gray-100">
-				<span class="inline-block bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 py-0.5">Beep</span>Boop
+			<h1
+				class="text-2xl font-mono md:text-3xl lg:text-4xl font-bold leading-tight mb-3 text-gray-900 dark:text-gray-100"
+			>
+				<span
+					class="inline-block bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 py-0.5"
+					>Beep</span
+				>Boop
 			</h1>
-			<p class="text-base md:text-lg max-w-2xl text-gray-600 dark:text-gray-400">
+			<p
+				class="text-base md:text-lg max-w-2xl text-gray-600 dark:text-gray-400"
+			>
 				Bits of myself I want to show to the internet.
 			</p>
 		</div>
 	</section>
 
 	<section class="max-w-5xl mx-auto px-6 py-8">
-
 		<div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-			{posts.map((post) => (
-				<a href={`/${post.id}`} class="block break-inside-avoid">
-					<article class="border border-gray-200 dark:border-gray-800 rounded-lg p-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
-						<h3 class="text-lg font-semibold mb-1 text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-							{post.data.title}
-						</h3>
-						<p class="text-sm text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">
-							{generateSnippet(post.body || '')}
-						</p>
-						{post.data.date && (
-							<time class="font-mono text-xs text-gray-500 dark:text-gray-500">
-								{new Date(post.data.date).toLocaleDateString('en-US', {
-									year: 'numeric',
-									month: 'short',
-									day: 'numeric'
-								})}
-							</time>
-						)}
-					</article>
-				</a>
-			))}
+			{
+				posts.map((post) => (
+					<a href={`/${post.id}`} class="block break-inside-avoid">
+						<article class="border border-gray-200 dark:border-gray-800 rounded-lg p-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-200">
+							<h3 class="text-lg font-semibold mb-1 text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+								{post.data.title}
+							</h3>
+							<p class="text-sm text-gray-600 dark:text-gray-400 mb-2 line-clamp-2">
+								{generateSnippet(post.body || "")}
+							</p>
+							{post.data.date && (
+								<time class="font-mono text-xs text-gray-500 dark:text-gray-500">
+									{new Date(
+										post.data.date,
+									).toLocaleDateString("en-US", {
+										year: "numeric",
+										month: "short",
+										day: "numeric",
+									})}
+								</time>
+							)}
+						</article>
+					</a>
+				))
+			}
 		</div>
 	</section>
 </Layout>

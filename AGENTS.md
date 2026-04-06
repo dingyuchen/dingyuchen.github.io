@@ -173,4 +173,4 @@ export async function getStaticPaths() {
 
 If there is anything unconventional or if there exists certain pitfalls for agents that are not immediately obvious, add them to this section so that future agents will be able to get the task right in one go:
 
-- 
+- Avoid using `bun run dev` as it can cause instability. Instead, use `bun run build` to test changes and inspect the output directly.

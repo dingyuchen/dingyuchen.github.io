@@ -2,9 +2,8 @@
 import "../styles/global.css";
 import "katex/dist/katex.min.css";
 import { Font } from "astro:assets";
-import { entrypoints } from "../utils/entrypoints";
+import HomeButton from "../components/Home.astro";
 import { title } from "../../astro.config.mjs";
-import { Code } from "astro:components";
 
 interface Props {
 	title?: string;
@@ -27,13 +26,7 @@ const { description = "Bits of myself I want to show to the internet" } =
 		<Font cssVariable="--font-sans" />
 		<Font cssVariable="--font-mono" />
 
-		<script is:inline define:vars={{ entrypoints }}>
-			document.addEventListener("DOMContentLoaded", () => {
-				const { highlighted } =
-					entrypoints[Math.floor(Math.random() * entrypoints.length)];
-				document.getElementById("main-link").innerHTML = highlighted;
-			});
-
+		<script is:inline>
 			const getTheme = () => {
 				if (
 					typeof localStorage !== "undefined" &&
@@ -52,6 +45,7 @@ const { description = "Bits of myself I want to show to the internet" } =
 				} else {
 					document.documentElement.classList.remove("dark");
 				}
+				document.documentElement.setAttribute("data-theme", theme);
 				localStorage.setItem("theme", theme);
 			};
 
@@ -80,13 +74,7 @@ const { description = "Bits of myself I want to show to the internet" } =
 			<nav
 				class="max-w-5xl mx-auto px-6 py-2 flex items-center justify-between"
 			>
-				<a
-					href="/"
-					id="main-link"
-					class="text-lg font-mono font-semibold hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-				>
-					int main()
-				</a>
+				<HomeButton />
 				<div class="flex items-center gap-6">
 					<a
 						href="/about"
