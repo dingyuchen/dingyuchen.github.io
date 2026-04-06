@@ -8,6 +8,8 @@ import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 
 import mdx from '@astrojs/mdx';
+import sitemap from "@astrojs/sitemap"
+import rehypeExpressiveCode from 'rehype-expressive-code'
 
 const shikiConfig = {
   themes: {
@@ -17,6 +19,10 @@ const shikiConfig = {
   defaultColor: 'light',
   wrap: true,
 };
+
+const expressiveCodeOptions = {
+  shiki: shikiConfig
+}
 
 export const shikiThemes = shikiConfig.themes;
 
@@ -43,10 +49,13 @@ export default defineConfig({
 
   site: 'https://dingyuchen.github.io',
 
-  integrations: [mdx({
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [[rehypeShiki, shikiConfig], rehypeKatex]
-  })],
+  integrations: [
+    mdx({
+      syntaxHighlight: false,
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [[rehypeExpressiveCode, expressiveCodeOptions], rehypeKatex],
+    }),
+    sitemap()],
 
   vite: {
     plugins: [tailwindcss()]

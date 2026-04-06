@@ -8,7 +8,6 @@ const codes = [
 	{ lang: 'python', code: 'if __name__ == "__main__":' },
 	{ lang: 'go', code: 'func main()' },
 	{ lang: 'haskell', code: 'main :: IO ()' },
-	{ lang: 'ocaml', code: 'let () =' },
 ] as const;
 
 const themes = Object.values(shikiThemes) as BundledTheme[];
