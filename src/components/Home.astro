@@ -24,11 +24,15 @@ const renderedEntrypoints = entrypoints.map(({ highlighted }) =>
 		/>
 	))
 }
-<script is:inline>
-	document.addEventListener("astro:page-load", () => {
+<script is:inline data-astro-rerun>
+	{
 		const entries = document.querySelectorAll("[data-entry]");
-		entries.forEach((entry) => entry.classList.toggle("hidden", true));
 		const idx = Math.floor(Math.random() * entries.length);
-		entries[idx].classList.toggle("hidden");
-	});
+		console.log(`Showing entry ${idx + 1} of ${entries.length}`);
+		for (const [i, entry] of entries.entries()) {
+			if (!entry.classList.toggle("hidden", i !== idx)) {
+				break;
+			}
+		}
+	}
 </script>
