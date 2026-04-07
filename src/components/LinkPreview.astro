@@ -1,0 +1,102 @@
+---
+interface Props {
+  href: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  domain?: string;
+}
+
+const { href, title, description, image, domain } = Astro.props;
+
+async function fetchOpenGraph(url: string) {
+  try {
+    const response = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
+    if (!response.ok) return null;
+    const html = await response.text();
+    const og: Record<string, string> = {};
+    const metaRegex = /<meta[^>]+property=["']og:(\w+)["'][^>]+content=["']([^"']*)["'][^>]*\/?>/gi;
+    let match;
+    while ((match = metaRegex.exec(html)) !== null) {
+      og[match[1]] = match[2];
+    }
+    const metaRegex2 = /<meta[^>]+content=["']([^"']*)["'][^>]+property=["']og:(\w+)["'][^>]*\/?>/gi;
+    while ((match = metaRegex2.exec(html)) !== null) {
+      og[match[2]] = match[1];
+    }
+    return og;
+  } catch {
+    return null;
+  }
+}
+
+const og = await fetchOpenGraph(href);
+
+const displayTitle = title || og?.title || href;
+const displayDescription = description || og?.description;
+const displayImage = image || og?.image;
+const displayDomain =
+  domain ||
+  (() => {
+    try {
+      return new URL(href).hostname;
+    } catch {
+      return "";
+    }
+  })();
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="block border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
+>
+  <div class="flex flex-col sm:flex-row">
+    {
+      displayImage && (
+        <div class="sm:w-40 h-40 sm:h-auto flex-shrink-0">
+          <img src={displayImage} alt="" class="w-full h-full object-cover" />
+        </div>
+      )
+    }
+    <div class="p-4 flex flex-col justify-between flex-1">
+      <div>
+        <h3
+          class="text-lg font-semibold text-gray-900 dark:text-gray-100 line-clamp-2"
+        >
+          {displayTitle}
+        </h3>
+        {
+          displayDescription && (
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+              {displayDescription}
+            </p>
+          )
+        }
+      </div>
+      <div
+        class="mt-2 flex items-center gap-1 text-xs text-gray-500 dark:text-gray-500"
+      >
+        <svg
+          class="w-3 h-3"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+          ></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+          ></path>
+        </svg>
+        <span class="truncate">{displayDomain}</span>
+      </div>
+    </div>
+  </div>
+</a>

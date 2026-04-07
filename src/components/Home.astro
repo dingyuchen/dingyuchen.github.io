@@ -28,11 +28,7 @@ const renderedEntrypoints = entrypoints.map(({ highlighted }) =>
 	{
 		const entries = document.querySelectorAll("[data-entry]");
 		const idx = Math.floor(Math.random() * entries.length);
-		console.log(`Showing entry ${idx + 1} of ${entries.length}`);
-		for (const [i, entry] of entries.entries()) {
-			if (!entry.classList.toggle("hidden", i !== idx)) {
-				break;
-			}
-		}
+		entries[0].classList.toggle("hidden", true);
+		entries[idx].classList.toggle("hidden", false);
 	}
 </script>

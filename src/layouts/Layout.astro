@@ -2,17 +2,16 @@
 import "../styles/global.css";
 import { Font } from "astro:assets";
 import HomeButton from "../components/Home.astro";
-import { ClientRouter, fade } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
 	title?: string;
 	description?: string;
 }
 
-const {
-	title = "2.5 Culture SWE",
-	description = "Bits of myself I want to show to the internet",
-} = Astro.props;
+const { title, description = "Bits of myself I want to show to the internet" } =
+	Astro.props;
+const headTitle = title ? `${title} | ding.gg` : "ding.gg";
 ---
 
 <!doctype html>
@@ -64,7 +63,7 @@ const {
 			}
 		</script>
 
-		<title>{title}</title>
+		<title>{headTitle}</title>
 	</head>
 	<body class="min-h-screen flex flex-col">
 		<header class="border-b border-gray-200 dark:border-gray-800">
