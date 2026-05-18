@@ -29,8 +29,6 @@ I think the main metric would be recall and precision compared to IVF-PQ, follow
 
 ## Does it even make sense?
 
-> tldr; not really.
-
 Generating the embedding for your search term is already going to require a model or an external call. 
 What is the point of the static vector search, if you need a server to handle the embedding generation? 
 You might as well just do the search on the server side as well, and return the results.
@@ -39,6 +37,6 @@ Calling a managed external service also doesn't make sense since you will be shi
 The alternative is to run the embedding on the client.
 The smallest model I have seen is > 600MB, which completely negates the bandwidth optimizations of the chunked index.
 
-However, I believe that there will come a time where devices will come with models onboard.
+However, I believe that we will reach a point where on-device models become more ubiquitous, which makes the idea feasible then.
 We see some direction of this with Apple's [Foundation Models Framework](https://developer.apple.com/documentation/FoundationModels) and Google's [Built-in AI](https://developer.chrome.com/docs/ai/built-in).
-This can be a proof of concept for when on-device models become more ubiquitous.
+This shall be an early proof of concept.

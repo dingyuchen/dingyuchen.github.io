@@ -1,0 +1,84 @@
+---
+title: AI-assisted Development on a VPS
+date: 2026-05-15
+---
+
+I migrated my Linode instance to Hetzner.
+During the migration, I realized most of the services I'm self-hosting are no longer useful to me.
+At the same time, AI tooling in my workplace has opened my eyes to the possibility of AI-assisted development.
+This is a guide to detail what I did to set up Hermes on a Hetzner VPS, and how I plan to use it for vibe-coding and rearchitecting my toy-application, a bill-spitting Telegram application called Nanasplits.
+
+# Setting up Hetzner
+
+## Buying a shared server
+Hetzner currently has the cheapest option for a VPS for its specs. 
+For my current setup, 2 vCPU and 4GB of RAM with 40GB of storage costs me €5.59/month.
+
+Selection options to take note of:
+- Image: Went with Ubuntu 24.04 for a batteries-included experience, but would have gone with something more efficient Fedora next time.
+- Networking: Public IPv4 is a **must**. [Cloning from Github require IPv4 addresses.](https://github.com/orgs/community/discussions/151477)
+- SSH Keys: Set up SSH keys and use your terminal to access the VPS. Hetzner's web console is absolute atrocious and pasting from clipboard mangles the paste content. It will be hell to just log in.
+- Firewall: There are 2 layers of firewall, Hetzner's own and Ubuntu's UFW. We will set up and duplicate the rules on both firewalls; Hetzner's has the benefit of blocking traffic before it reaches your VPS, but UFW is more intuitive to manage.
+
+## User setup
+
+Assuming the VPS has started up, `ssh` into the server as the root user.
+```bash
+ssh root@<IP_ADDRESS>
+```
+Once in, do an update of the system.
+We shall also install some necessary utilities.
+```bash
+apt update && apt upgrade -y
+apt install -y curl git ufw unzip
+```
+
+### Create and run Hermes as a non-root user
+
+It is generally a good practice to run applications as a non-root user for security reasons.
+
+```bash
+adduser hermes
+usermod -aG sudo hermes
+```
+
+Copy your SSH public key to the new user's `authorized_keys` file to allow SSH access.
+```bash
+cp ~/.ssh/authorized_keys /home/hermes/.ssh/authorized_keys
+chown -R hermes:hermes /home/hermes/.ssh/authorized_keys
+chmod 600 /home/hermes/.ssh/authorized_keys
+```
+
+Now, test that you can log in as the new user.
+```bash
+ssh hermes@<IP_ADDRESS>
+```
+
+## Firewall setup
+
+### Tailscale private VPN
+
+## Hermes installation
+
+### Use on telegram
+
+## Public facing web app
+
+### Cloudflare DNS
+
+### Caddy reverse proxy
+
+# Setting up a public-facing web service
+
+The goal I want to achieve is to be able to guide the development of _**and test**_ new features on Nanasplits with Hermes from my phone, while I'm out and about.
+The idea goes something like this:
+1. dev server is exposed to the public internet and accessed via Telegram
+2. Hermes makes changes to the local copy of codebase.
+3. Dev version of Telegram mini-app gets hot-reloaded with the new code, and I can test the changes on the spot.
+4. Iterate and repeat.
+
+Once the feature is ready, I can then merge the code to master.
+Build is done on the VPS and deployment is just a `systemctl reload` of the `./dist` folder.
+Essentially the VPS instance is the source of truth while Github is just a mirror.
+
+## 
