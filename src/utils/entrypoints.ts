@@ -2,6 +2,7 @@ import { ExpressiveCodeBlock, type RehypeExpressiveCodeOptions } from 'rehype-ex
 import { toHtml } from 'rehype-expressive-code/hast';
 import { createRenderer } from 'rehype-expressive-code';
 import { rehypeExpressiveCodeOptions } from '../../ec.config.mjs';
+import { getCollection } from 'astro:content';
 
 const codes = [
 	{ lang: 'cpp', code: 'int main(int argc, char* argv[])' },
@@ -36,3 +37,5 @@ export const entrypointStyles = renderer.themeStyles;
 export const entrypoints = await Promise.all(codes.map(async ({ code, lang }) => ({
 	highlighted: await toHtmlx(code, lang),
 })));
+
+export const combinedCollection = [...(await getCollection("blog")).filter((post) => !post.data.hidden), ...(await getCollection("til")).filter((til) => !til.data.hidden)];

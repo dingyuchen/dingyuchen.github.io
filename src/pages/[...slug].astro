@@ -3,22 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import BlogPost from "../components/BlogPost.astro";
 import TilPost from "../components/TilPost.astro";
 import { getCollection, render } from "astro:content";
+import { combinedCollection } from "../utils/entrypoints";
 
 export async function getStaticPaths() {
-	const posts = (await getCollection("blog")).filter(
-		(post) => !post.data.hidden,
-	);
-	const tils = await getCollection("til");
-	return [
-		...posts.map((post) => ({
-			params: { slug: post.id },
-			props: { content: post },
-		})),
-		...tils.map((til) => ({
-			params: { slug: til.id },
-			props: { content: til },
-		})),
-	];
+	return combinedCollection.map((entry) => ({
+		params: { slug: entry.id },
+		props: { content: entry },
+	}));
 }
 
 const { content } = Astro.props;

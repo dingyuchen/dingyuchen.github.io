@@ -6,7 +6,9 @@ date: 2026-05-15
 I migrated my Linode instance to Hetzner.
 During the migration, I realized most of the services I'm self-hosting are no longer useful to me.
 At the same time, AI tooling in my workplace has opened my eyes to the possibility of AI-assisted development.
-This is a guide to detail what I did to set up Hermes on a Hetzner VPS, and how I plan to use it for vibe-coding and rearchitecting my toy-application, a bill-spitting Telegram application called Nanasplits.
+This is a guide for what I did to set up Hermes on a Hetzner VPS, and how I plan to use it for vibe-coding and rearchitecting my toy-application, a bill-spitting Telegram application called Nanasplits.
+
+It may be scant on details, but it should put all the resources in one place for anyone who wants to do something similar.
 
 # Setting up Hetzner
 
@@ -18,7 +20,15 @@ Selection options to take note of:
 - Image: Went with Ubuntu 24.04 for a batteries-included experience, but would have gone with something more efficient Fedora next time.
 - Networking: Public IPv4 is a **must**. [Cloning from Github require IPv4 addresses.](https://github.com/orgs/community/discussions/151477)
 - SSH Keys: Set up SSH keys and use your terminal to access the VPS. Hetzner's web console is absolute atrocious and pasting from clipboard mangles the paste content. It will be hell to just log in.
-- Firewall: There are 2 layers of firewall, Hetzner's own and Ubuntu's UFW. We will set up and duplicate the rules on both firewalls; Hetzner's has the benefit of blocking traffic before it reaches your VPS, but UFW is more intuitive to manage.
+- Firewall: There are 2 layers of firewall, Hetzner's own and Ubuntu's UFW. We will set up and duplicate the rules on both firewalls; Hetzner's has the benefit of blocking traffic before it reaches your VPS, and we use UFW as a baseline.
+
+## Firewall rules
+
+Firstly, we need to set up the firewall rules on Hetzner's dashboard to allow incoming traffic on the necessary ports.
+In case this is not present as the default, you will minimally need:
+- Port 22, ICMP: This lets us SSH into the server.
+
+Subsequently, we will set up other rules for Tailscale and HTTPS, to be covered later.
 
 ## User setup
 
@@ -58,15 +68,72 @@ ssh hermes@<IP_ADDRESS>
 
 ### Tailscale private VPN
 
+Instead of exposing SSH to the public, we shall set up a private VPN using Tailscale.
+This means that only devices authenticated to the Tailscale network can access the VPS; more security for us.
+
+Follow the [official installation guide](https://tailscale.com/docs/install/cloud/hetzner) for Hetzner
+
+> Note that this adds a firewall rule to allow UDP port 41641
+
 ## Hermes installation
+
+Follow the [official installation guide](https://hermes-agent.nousresearch.com/docs/getting-started/installation) to install Hermes on the VPS.
+
+Straightforward, nothing much to add here.
 
 ### Use on telegram
 
+The [official instructions](https://hermes-agent.nousresearch.com/docs/user-guide/messaging/telegram) will set you up for using Hermes on Telegram.
+
+> One thing to note is that you will need to **turn off** privacy mode in bot settings, but enable **require_mention** in the Hermes config, in order to trigger the bot with @bot mentions in a group chat.
+
+We can keep the long polling setup, as using the webhook entails exposing a public endpoint. 
+I found this unnecessary, but you will need to make changes the to Caddy and Cloudflare DNS setup later to enable this.
+
+
 ## Public facing web app
+
+In order to serve the official and development version of the Telegram mini-app, we need to provide a public-facing endpoint.
+We should have a lone instance of the development version at some port (3000), and the official version will run as multiple instances as a systemd service with PM2, and be reverse-proxied by Caddy.
+
+The reason to have multiple instances of the production app is to able to do zero-downtime deployment, and also to maintain availability of the service in case one instance crashes.
 
 ### Cloudflare DNS
 
+I set up a subdomain `nanasplits.ding.gg` that points to the VPS' public IP address. 
+For TLS, we will use Cloudflare's free SSL certificate, and set the SSL/TLS mode to "Full (strict)".
+
+This means that the traffic between Cloudflare and the VPS will also be encrypted.
+In Hetzner's firewall, allow incoming traffic on port 443 only for HTTPS.
+
 ### Caddy reverse proxy
+
+With Ubuntu, installing Caddy via `apt` will automatically set up Caddy as a systemd service.
+Simply edit the Caddyfile to add a new site configuration for `nanasplits.ding.gg` that reverse proxies to the production app instances.
+
+```caddy frame="code" title="/etc/caddy/Caddyfile"
+# Simple test endpoint to verify the server and Caddy is up and running.
+ping.ding.gg {
+        respond "PONG" 200
+}
+
+# Refer to the Caddy docs for more information:
+# https://caddyserver.com/docs/caddyfile
+
+# production app
+nanasplits.ding.gg {
+        reverse_proxy [::1]:3001 [::1]:3002 [::1]:3003 {
+                lb_policy round_robin
+        }
+}
+
+# development app
+nanasplitsdev.ding.gg {
+        reverse_proxy [::1]:3000
+}
+```
+
+> Localhost addresses are in IPV6 format, hence the `[::1]` since Hetzner VPS do not come with an IPV4 loopback interface.
 
 # Setting up a public-facing web service
 

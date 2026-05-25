@@ -1,10 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { combinedCollection } from "../utils/entrypoints";
 
-const posts = (await getCollection("blog")).filter((post) => !post.data.hidden);
-const tils = await getCollection("til");
-const entries = [...posts, ...tils].sort((a, b) => {
+const entries = combinedCollection.sort((a, b) => {
 	const dateA = a.data.date ? new Date(a.data.date).valueOf() : 0;
 	const dateB = b.data.date ? new Date(b.data.date).valueOf() : 0;
 	return dateB - dateA;

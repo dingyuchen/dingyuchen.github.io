@@ -16,6 +16,7 @@ const til = defineCollection({
   schema: z.object({
     date: z.coerce.date(),
     source: z.url(),
+    hidden: z.boolean().default(false),
   }),
 });
 
