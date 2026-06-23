@@ -8,35 +8,41 @@ An idea popped into my head while checking out this search solution for statical
 Pagefind works by building an index of your site's content at build time, and then uses that index to perform searches on the client side. 
 Data bandwidth is saved by using an ordered index, so that only a portion of the index needs to be downloaded, based on metadata.
 
-This inspired me to try building a static vector search solution.
-I have also been meaning to try out running gpu accelerated code in the browser. For large sites, parallelization and gpu acceleration will greatly enhance the user experience, if it is possible.
+This inspired me to try building a static vector search solution, and by extension, hybrid search.
+Big tech companies are going in the direction of offloading LLM computation into on-board devices.
+We see some direction of this with Apple's [Foundation Models Framework](https://developer.apple.com/documentation/FoundationModels) and Google's [Built-in AI in Google Chrome](https://developer.chrome.com/docs/ai/built-in),[(2)](https://github.com/explainers-by-googlers/embedding-api).
+So in the same way PageFind fulfills the niche of a good search experience for static sites, there should also be a usecase for simple semantic queries, powered by small, on-device models. (Maybe user guides, documentation)
 
 ## Sketch
 
-There are quite a few Approximate Nearest Neighbor (ANN) algorithms. But the one that seems to be the most popular is HNSW, which is basically a skip-list in higher dimensions.
-Unfortunately, each layer strictly increases in size, so there is no way to save bandwidth by only downloading a portion of the index with the traditional algorithm.
+There are quite a few Approximate Nearest Neighbor (ANN) algorithms, but the approaches generally are split into:
+1. Pruning the graph search space (IVF, HNSW)
+2. Compressing vector representations to make it cheaper to perform search (DISKANN)
 
-Idea: For each layer, each node in a layer maps to a distinct layer which contains the neighbourhood of the node in the previous layer.
+The approaches are not mutually exclusive, but one can imagine that stacking them will introduce more approximations and therefore a lower recall.
 
-This allows us to prune the search space by fixing the size of each layer, akin to a B+ tree, but for higher dimensions.
-This is also amenable to parallelization, as all the nodes in a layer can be compared to the query in parallel.
+Idea: In our case, the client-server situation lends very nicely to the memory-disk interaction in DISKANN.
+One can simply treat the resource requests to the server as very expensive disk reads.
+With that, the implementation falls straight into our laps.
+On load, the client would obtain a compressed, quantized version of the vector graph.
+With the query vector, we perform a beam search to obtain some top K document vectors, and then request the server for full uncompressed values of said vectors and perform reranking.
 
-There are also some build time optimizations that are possible with parallelization, but this will be fleshed out in the future.
+On the server side however, we need to take care of model versioning, since vector embeddings are not interchangable between models.
+This means that we need a new copy of the vector graph for every embedding model that we wish to support.
 
-### Evaluation
+A proof of concept would simply be a naive implementation of the DISKANN algorithm as described above.
+We can also incorporate regular full-text search to achieve hybrid search directly.
+The aggregration and rerank can be a simple RRF scoring, although reranking with a small embedded LLM should also be trivial (at the point of writing Chrome already ships with a chat model but not an embedding one).
 
-I think the main metric would be recall and precision compared to IVF-PQ, followed by latency and bandwidth usage.
+## Ending notes
 
-## Does it even make sense?
+This is a good idea under the assumption that the browser ships with the models.
+If this does not happen however, a bandwidth-conscious hybrid search library is a non-sequitor.
+Small embedding models I have seen are ~600MB, which completely negates any claim of bounding bandwidth.
+Not to mention AI reranking after RRF, which requires another model.
 
-Generating the embedding for your search term is already going to require a model or an external call. 
-What is the point of the static vector search, if you need a server to handle the embedding generation? 
-You might as well just do the search on the server side as well, and return the results.
-Calling a managed external service also doesn't make sense since you will be shipping your API key to the client!
+However, I predict that we will reach a point where on-device models become more ubiquitous, which makes the idea eventually feasible.
+In the meantime, the user should be prompted for a request to download a small model instead of doing it silently.
 
-The alternative is to run the embedding on the client.
-The smallest model I have seen is > 600MB, which completely negates the bandwidth optimizations of the chunked index.
-
-However, I believe that we will reach a point where on-device models become more ubiquitous, which makes the idea feasible then.
-We see some direction of this with Apple's [Foundation Models Framework](https://developer.apple.com/documentation/FoundationModels) and Google's [Built-in AI](https://developer.chrome.com/docs/ai/built-in).
-This shall be an early proof of concept.
+## References
+- https://github.com/tobi/qmd
